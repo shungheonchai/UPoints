@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Buyer rating:</strong>
+  <%= @request.buyer_rating %>
+</p>
+
+<p>
+  <strong>Seller rating:</strong>
+  <%= @request.seller_rating %>
+</p>
+
+<p>
+  <strong>Buyer:</strong>
+  <%= @request.buyer %>
+</p>
+
+<p>
+  <strong>Seller:</strong>
+  <%= @request.seller %>
+</p>
+
+<p>
+  <strong>Food description:</strong>
+  <%= @request.food_description %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @request.price %>
+</p>
+
+<p>
+  <strong>Time period:</strong>
+  <%= @request.time_period %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @request.location %>
+</p>
+
+<p>
+  <strong>Exchange method:</strong>
+  <%= @request.exchange_method %>
+</p>
+
+<p>
+  <strong>Special request:</strong>
+  <%= @request.special_request %>
+</p>
+
+<%= link_to 'Edit', edit_request_path(@request) %> |
+<%= link_to 'Back', requests_path %>

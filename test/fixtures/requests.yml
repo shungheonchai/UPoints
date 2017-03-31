@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  buyer_rating: 
+  seller_rating: 
+  buyer: MyString
+  seller: MyString
+  food_description: MyText
+  price: 1.5
+  time_period: 2017-03-30 10:47:14
+  location: MyString
+  exchange_method: MyString
+  special_request: MyText
+
+two:
+  buyer_rating: 
+  seller_rating: 
+  buyer: MyString
+  seller: MyString
+  food_description: MyText
+  price: 1.5
+  time_period: 2017-03-30 10:47:14
+  location: MyString
+  exchange_method: MyString
+  special_request: MyText

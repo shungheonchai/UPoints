@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :ratings
+  resources :requests
   devise_for :users
   root to: "static_pages#home"
 
@@ -9,4 +11,6 @@ Rails.application.routes.draw do
     get 'sign_up', to: 'devise/registrations#new'
   end
 
+  resources :requests
+  resources :ratings
 end

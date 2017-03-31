@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Requests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Buyer rating</th>
+      <th>Seller rating</th>
+      <th>Buyer</th>
+      <th>Seller</th>
+      <th>Food description</th>
+      <th>Price</th>
+      <th>Time period</th>
+      <th>Location</th>
+      <th>Exchange method</th>
+      <th>Special request</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @requests.each do |request| %>
+      <tr>
+        <td><%= request.buyer_rating %></td>
+        <td><%= request.seller_rating %></td>
+        <td><%= request.buyer %></td>
+        <td><%= request.seller %></td>
+        <td><%= request.food_description %></td>
+        <td><%= request.price %></td>
+        <td><%= request.time_period %></td>
+        <td><%= request.location %></td>
+        <td><%= request.exchange_method %></td>
+        <td><%= request.special_request %></td>
+        <td><%= link_to 'Show', request %></td>
+        <td><%= link_to 'Edit', edit_request_path(request) %></td>
+        <td><%= link_to 'Destroy', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Request', new_request_path %>
