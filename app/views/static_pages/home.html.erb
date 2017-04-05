@@ -1,13 +1,16 @@
 <% content_for :top_content do %>
     <div class="jumbotron">
       <div class="container" style="relative;">
-        <h1>Welcome to UPoints</h1>
 
-        <h2>In development</h2>
+
+
         <div style="position: relative; text-align:center">
-          <div style ="position: absolute; right: 5px">
-            <%= link_to 'List of Requests', requests_path%>
-          </div>
+            <span style = "position: absolute; left: 0px;"><h1>Welcome to UPoints</h1></span><br><br><br><br>
+          <span style = "position: absolute; left: 5px"><h2>In Development</h2></span>
+          <span style ="position: absolute; right: 5px">
+            <h3><%= link_to 'List of Requests', requests_path%></h3>
+          </span>
+          <br><br><br>
           <img src = "/assets/food.jpg" alt="Food" align=middle width = 100%">
 
         </div>

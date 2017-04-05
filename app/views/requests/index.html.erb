@@ -1,34 +1,50 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Requests</h1>
-table, th, td {
-  border: 1px solid black;
-}
+<br>
+<style>
+  table, th {
+    border-bottom: 2px solid;
+    padding: 7px;
+    white-space: nowrap;
+    table-layout: fixed;
+    text-overflow: ellipsis;
+    max-width: 200px;
+  }
+  td {
+    border-bottom: 1px solid;
+    padding: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 200px;
+  }
+</style>
 <table>
   <thead>
-    <tr>
-      <th>Buyer rating</th>
-      <th>Seller rating</th>
-      <th>Buyer</th>
-      <th>Seller</th>
-      <th>Food description</th>
-      <th>Price</th>
-      <th>Time period</th>
-      <th>Location</th>
-      <th>Exchange method</th>
-      <th>Special request</th>
-      <th colspan="3"></th>
-    </tr>
+  <tr>
+    <th>Buyer Rating</th>
+    <th>Seller Rating</th>
+    <th>Buyer</th>
+    <th>Seller</th>
+    <th>Food Description</th>
+    <th>Price</th>
+    <th>Time Period</th>
+    <th>Location</th>
+    <th>Exchange Method</th>
+    <th>Special Request</th>
+    <th colspan="3" style="text-align:center">View</th>
+  </tr>
   </thead>
 
   <tbody>
-    <% @requests.each do |request| %>
+  <% @requests.each do |request| %>
       <tr>
         <td><%= request.buyer_rating %></td>
         <td><%= request.seller_rating %></td>
         <td><%= request.buyer %></td>
         <td><%= request.seller %></td>
-        <td><%= request.food_description %></td>
+        <td style="width:50px;text-overflow:ellipsis"><%= request.food_description %></td>
         <td><%= request.price %></td>
         <td><%= request.time_period %></td>
         <td><%= request.location %></td>
@@ -36,9 +52,9 @@ table, th, td {
         <td><%= request.special_request %></td>
         <td><%= link_to 'Show', request %></td>
         <td><%= link_to 'Edit', edit_request_path(request) %></td>
-        <td><%= link_to 'Destroy', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
 
