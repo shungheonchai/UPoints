@@ -34,11 +34,12 @@
       display: inline-block;
       color: white;
       text-align: center;
-      padding: 14px 16px;
+      padding: 16px 16px;
       text-decoration: none;
+      font-size: 18px;
       border-left: 1px solid #bbb;
     }
-    li:last-child {
+    button:last-child {
       border-right: none;
     }
 
@@ -48,44 +49,48 @@
     li.active {
       background-color: #4CAF50;
     }
-    li a, .dropbtn {
-      display: inline-block;
+    .dropbtn {
+      background-color: #333;
       color: white;
-      text-align: center;
-      padding: 14px 16px;
-      text-decoration: none;
+      padding: 16px;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      border-left: 1px solid #bbb;
     }
 
-    li a:hover, .dropdown:hover .dropbtn {
+    .dropbtn:hover, .dropbtn:focus {
       background-color: black;
     }
 
-    li.dropdown {
+    .dropdown {
+      float: right;
+      position: relative;
       display: inline-block;
+
     }
 
     .dropdown-content {
       display: none;
-      position: absolute;
       background-color: #f9f9f9;
       min-width: 160px;
+      overflow: hidden;
       box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      right: 0;
       z-index: 1;
     }
 
     .dropdown-content a {
+      float: none;
       color: black;
       padding: 12px 16px;
       text-decoration: none;
       display: block;
-      text-align: left;
     }
 
-    .dropdown-content a:hover {background-color: #f1f1f1}
+    .dropdown a:hover {background-color: #f1f1f1}
 
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
+    .show {display:block;}
   </style>
 
 </head>
@@ -94,18 +99,39 @@
 
 <ul>
   <li class="active"><a href="/" style="color:white; text-decoration:none">UPoints</a></li>
-  <li><a href="/requests" style="color:white; text-decoration:none" >Requests</a></li>
+  <li><a href="/requests" style="color:white; text-decoration:none; font-size:14px" >Requests</a></li>
 
   <% if user_signed_in? %>
-      <li class="dropdown" style="float:right">
-        <a  class="dropbtn" style="text-decoration:none"><%= current_user.first_name+' '+ current_user.last_name %></a>
-        <div class="dropdown-content">
+      <div class="dropdown">
+        <button class="dropbtn" onclick="myFunction()"style="float:right; text-decoration:none">
+          <%= current_user.first_name+' '+ current_user.last_name %>
+        </button>
+        <div class="dropdown-content" id="myDropdown">
           <a href="users/edit">Profile</a>
+          <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
         </div>
-      </li>
+      </div>
+      <script>
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+      </script>
   <% else %>
-      <li style="float:right"><%= link_to 'Log In', new_user_session_path %></li>
-      <li style="float:right"><%= link_to 'Sign Up', new_user_registration_path %></li>
+      <li style="float:right"><a href="/users/sign_up" style="color:white; text-decoration:none; font-size:14px">Sign Up</a></li>
+      <li style="float:right"><a href="/users/sign_in" style="color:white; text-decoration:none; font-size:14px">Log In</a></li>
   <% end %>
 </ul>
 <br><br>

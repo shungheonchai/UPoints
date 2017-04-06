@@ -22,9 +22,13 @@
   </div>
 
   <div class="field">
-    <%= f.label :time_period %>
-    <%= f.datetime_select :time_period %>
+    <%= f.label :start_time %>
+    <%= f.datetime_select :start_time %>
   </div>
+    <div class="field">
+      <%= f.label :end_time %>
+      <%= f.datetime_select :end_time %>
+    </div>
 
   <div class="field">
     <%= f.label :location %>

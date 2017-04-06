@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
-
-<h1>Requests</h1>
+<br>
+<h1 style="text-align:center">Requests</h1>
 <br>
 <style>
   table, th {
@@ -17,43 +17,84 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    max-width: 400px;
+    max-width: 200px;
   }
 </style>
-<table>
-  <thead>
-  <tr>
-    <th>Poster Rating</th>
-    <th>Poster</th>
-    <th>Food Description</th>
-    <th>Price</th>
-    <th>Time Period</th>
-    <th>Location</th>
-    <th>Exchange Method</th>
-    <th>Special Request</th>
-    <th colspan="3" style="text-align:center">View</th>
-  </tr>
-  </thead>
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'Requests')" id="defaultOpen">All Requests</button>
+  <button class="tablinks" onclick="openCity(event, 'Posts')">Your Requestss</button>
+  <button class="tablinks" onclick="openCity(event, 'Accepted')">Accepted Requests</button>
+</div>
 
-  <tbody>
-  <% @requests.each do |request| %>
-      <tr id="highlight">
-        <td><%= request.buyer_rating %></td>
-        <td><%= request.buyer %></td>
-        <td style="width:50px;text-overflow:ellipsis"><%= request.food_description %></td>
-        <td><%= request.price %></td>
-        <td><%= request.time_period %></td>
-        <td><%= request.location %></td>
-        <td><%= request.exchange_method %></td>
-        <td><%= request.special_request %></td>
-        <td><%= link_to 'Show', request %></td>
-        <td><%= link_to 'Edit', edit_request_path(request) %></td>
-        <!--<td><%= link_to 'Delete', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+<div id="Requests" class="tabcontent">
+  <table>
+    <thead>
+    <tr>
+      <th>Rating</th>
+      <th>Poster</th>
+      <th>Food Description</th>
+      <th>Price</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Location</th>
+      <th>Exchange Method</th>
+      <th>Special Request</th>
+      <th colspan="3" style="text-align:center">View</th>
+    </tr>
+    </thead>
 
-<br>
+    <tbody>
+    <% @requests.each do |request| %>
+        <tr id="highlight">
+          <td><%= request.buyer_rating %></td>
+          <td><%= request.buyer %></td>
+          <td style="width:50px;text-overflow:ellipsis"><%= request.food_description %></td>
+          <td><%= request.price %></td>
+          <td><%= request.start_time %></td>
+          <td><%= request.end_time %></td>
+          <td><%= request.location %></td>
+          <td><%= request.exchange_method %></td>
+          <td><%= request.special_request %></td>
+          <td><%= link_to 'Accept', request %></td>
+          <td><%= link_to 'Expand', request %></td>
+          <!--<td><%= link_to 'Edit', edit_request_path(request) %></td>-->
+          <!--<td><%= link_to 'Delete', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'New Request', new_request_path %>
+  <br>
+
+  <%= link_to 'New Request', new_request_path %>
+</div>
+
+<div id="Posts" class="tabcontent">
+  <h3>Paris</h3>
+  <p>Paris is the capital of France.</p>
+</div>
+
+<div id="Accepted" class="tabcontent">
+  <h3>Tokyo</h3>
+  <p>Tokyo is the capital of Japan.</p>
+</div>
+
+<script>
+    function openCity(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+</script>
+

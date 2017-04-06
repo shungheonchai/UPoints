@@ -1,6 +1,14 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Rating:</strong>
+  <%= @request.buyer_rating %>
+</p>
+<p>
+  <strong>User:</strong>
+  <%= @request.buyer %>
+</p>
+<p>
   <strong>Price:</strong>
   <%= @request.price %>
 </p>
@@ -11,8 +19,12 @@
 </p>
 
 <p>
-  <strong>Time period:</strong>
-  <%= @request.time_period %>
+  <strong>Start Time:</strong>
+  <%= @request.start_time %>
+</p>
+<p>
+  <strong>End Time:</strong>
+  <%= @request.end_time %>
 </p>
 
 <p>
