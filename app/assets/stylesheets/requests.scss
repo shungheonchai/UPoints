@@ -1,3 +1,18 @@
 // Place all the styles related to the Requests controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+table, th {
+  border-bottom: 2px solid;
+  padding: 7px;
+  white-space: nowrap;
+}
+td {
+  border-bottom: 1px solid;
+  padding: 5px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 5px;
+}
+tr:hover{background-color:#7093DB !important}
+tr:nth-child(even){background-color: #f2f2f2}
