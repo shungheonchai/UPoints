@@ -1,43 +1,115 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>UTask</title>
+  <title>UPoints</title>
   <%= csrf_meta_tags %>
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <style>
+    body {margin:0;}
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
+
+    li {
+      float: left;
+      border-right: 1px solid #bbb;
+    }
+    a {
+      text-decoration:none;
+    }
+    a:hover{
+      color:#FFF
+    }
+    li a, .dropbtn {
+      display: inline-block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      border-left: 1px solid #bbb;
+    }
+    li:last-child {
+      border-right: none;
+    }
+
+    li a:hover:not(.active) {
+      background-color: #111;
+    }
+    li.active {
+      background-color: #4CAF50;
+    }
+    li a, .dropbtn {
+      display: inline-block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    li a:hover, .dropdown:hover .dropbtn {
+      background-color: black;
+    }
+
+    li.dropdown {
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      text-align: left;
+    }
+
+    .dropdown-content a:hover {background-color: #f1f1f1}
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+  </style>
+
 </head>
 
 <body>
-<nav class="navbar navbar-inverse">
-  <div class="container">
-    <div class="navbar-header">
-      <%= link_to 'UPoints', root_path, class: 'navbar-brand' %>
-    </div>
-    <div id="navbar">
-      <ul class="nav navbar-nav">
-        <li><%= link_to 'Requests', requests_path %></li>
-      </ul>
-      <ul class="nav navbar-nav pull-right">
-        <% if user_signed_in? %>
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <%= current_user.first_name+' '+ current_user.last_name %>
-                <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu" role="menu">
-                <li><%= link_to 'Profile', edit_user_registration_path %></li>
-                <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
-              </ul>
-            </li>
-        <% else %>
-            <li><%= link_to 'Log In', new_user_session_path %></li>
-            <li><%= link_to 'Sign Up', new_user_registration_path %></li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-</nav>
+
+<ul>
+  <li class="active"><a href="/" style="color:white; text-decoration:none">UPoints</a></li>
+  <li><a href="/requests" style="color:white; text-decoration:none" >Requests</a></li>
+
+  <% if user_signed_in? %>
+      <li class="dropdown" style="float:right">
+        <a  class="dropbtn" style="text-decoration:none"><%= current_user.first_name+' '+ current_user.last_name %></a>
+        <div class="dropdown-content">
+          <a href="users/edit">Profile</a>
+        </div>
+      </li>
+  <% else %>
+      <li style="float:right"><%= link_to 'Log In', new_user_session_path %></li>
+      <li style="float:right"><%= link_to 'Sign Up', new_user_registration_path %></li>
+  <% end %>
+</ul>
+<br><br>
+
 <div class="container">
   <% flash.each do |key, value| %>
       <div class="alert alert-<%= key %>">
@@ -54,3 +126,33 @@
 </div>
 </body>
 </html>
+<!--<nav class="navbar navbar-inverse">-->
+<!--<div class="container">-->
+<!--<div class="navbar-header">-->
+<!--<%= link_to 'UPoints', root_path, {:style=>'color:#3CBC3C;', :class => 'navbar-brand'} %>-->
+
+<!--</div>-->
+<!--<div id="navbar" onMouseOver="this.style.color='#3CBC3C'">-->
+<!--<ul class="nav navbar-nav">-->
+<!--<li><%= link_to 'Requests', requests_path%></li>-->
+<!--</ul>-->
+<!--<ul class="nav navbar-nav pull-right">-->
+<!--<% if user_signed_in? %>-->
+    <!--<li class="dropdown">-->
+    <!--<a class="dropdown-toggle" data-toggle="dropdown" href="#" >-->
+    <!--<%= current_user.first_name+' '+ current_user.last_name %>-->
+    <!--<span class="caret"></span>-->
+    <!--</a>-->
+    <!--<ul class="dropdown-menu" role="menu">-->
+    <!--<li><%= link_to 'Profile', edit_user_registration_path %></li>-->
+    <!--<li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>-->
+    <!--</ul>-->
+    <!--</li>-->
+    <!--<% else %>-->
+    <!--<li><%= link_to 'Log In', new_user_session_path %></li>-->
+    <!--<li><%= link_to 'Sign Up', new_user_registration_path %></li>-->
+    <!--<% end %>-->
+<!--</ul>-->
+<!--</div>-->
+<!--</div>-->
+<!--</nav>-->

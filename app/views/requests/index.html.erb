@@ -5,7 +5,7 @@
 <style>
   table, th {
     border-bottom: 2px solid;
-    padding: 7px;
+    padding: 10px;
     white-space: nowrap;
     table-layout: fixed;
     text-overflow: ellipsis;
@@ -13,20 +13,18 @@
   }
   td {
     border-bottom: 1px solid;
-    padding: 5px;
+    padding: 10px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    max-width: 200px;
+    max-width: 400px;
   }
 </style>
 <table>
   <thead>
   <tr>
-    <th>Buyer Rating</th>
-    <th>Seller Rating</th>
-    <th>Buyer</th>
-    <th>Seller</th>
+    <th>Poster Rating</th>
+    <th>Poster</th>
     <th>Food Description</th>
     <th>Price</th>
     <th>Time Period</th>
@@ -39,11 +37,9 @@
 
   <tbody>
   <% @requests.each do |request| %>
-      <tr>
+      <tr id="highlight">
         <td><%= request.buyer_rating %></td>
-        <td><%= request.seller_rating %></td>
         <td><%= request.buyer %></td>
-        <td><%= request.seller %></td>
         <td style="width:50px;text-overflow:ellipsis"><%= request.food_description %></td>
         <td><%= request.price %></td>
         <td><%= request.time_period %></td>
@@ -52,7 +48,7 @@
         <td><%= request.special_request %></td>
         <td><%= link_to 'Show', request %></td>
         <td><%= link_to 'Edit', edit_request_path(request) %></td>
-        <td><%= link_to 'Delete', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <!--<td><%= link_to 'Delete', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
       </tr>
   <% end %>
   </tbody>

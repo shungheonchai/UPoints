@@ -11,8 +11,9 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   devise_scope :user do
-    get 'sign_in', to: 'devise/sessions#new'
-    get 'sign_up', to: 'devise/registrations#new'
+    get 'sign_in', to: 'users/sessions#new'
+    get 'sign_up', to: 'users/registrations#new'
+    get 'edit_user_registration', to: 'users/registrations#edit'
   end
 
   resources :requests
