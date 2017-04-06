@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :ratings
-  has_and_belongs_to_many :requests
+  has_many :requests
 
   # Include default devise modules. Others available are:
   # :timeoutable and :omniauthable

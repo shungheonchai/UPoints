@@ -5,6 +5,8 @@ class RequestsController < ApplicationController
   # GET /requests.json
   def index
     @requests = Request.all
+    @user_posted_requests = Request.where(user_id: current_user.id)
+    @user_accepted_requests = Request.where(user_other_id: current_user.id)
   end
 
   # GET /requests/1
