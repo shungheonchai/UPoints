@@ -64,8 +64,8 @@
     }
 
     .dropdown {
-      float: right;
-      position: relative;
+      right:0;
+      position: absolute;
       display: inline-block;
 
     }
@@ -100,18 +100,18 @@
 <ul>
   <li class="active"><a href="/" style="color:white; text-decoration:none">UPoints</a></li>
   <li><a href="/requests" style="color:white; text-decoration:none; font-size:14px" >Requests</a></li>
-
-  <% if user_signed_in? %>
-      <div class="dropdown">
-        <button class="dropbtn" onclick="myFunction()"style="float:right; text-decoration:none">
-          <%= current_user.first_name+' '+ current_user.last_name %>
-        </button>
-        <div class="dropdown-content" id="myDropdown">
-          <a href="/users/edit">Profile</a>
-          <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
-        </div>
+</ul>
+<% if user_signed_in? %>
+    <div class="dropdown">
+      <button class="dropbtn" onclick="myFunction()"style="float:right; text-decoration:none; height:50px">
+        <%= current_user.first_name+' '+ current_user.last_name %>
+      </button>
+      <div class="dropdown-content" id="myDropdown">
+        <a href="users/edit">Profile</a>
+        <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
       </div>
-      <script>
+    </div>
+    <script>
         function myFunction() {
             document.getElementById("myDropdown").classList.toggle("show");
         }
@@ -128,12 +128,13 @@
                 }
             }
         }
-      </script>
-  <% else %>
-      <li style="float:right"><a href="/users/sign_up" style="color:white; text-decoration:none; font-size:14px">Sign Up</a></li>
-      <li style="float:right"><a href="/users/sign_in" style="color:white; text-decoration:none; font-size:14px">Log In</a></li>
-  <% end %>
-</ul>
+    </script>
+<% else %>
+    <div class="dropdown">
+      <li style="float:right"><a href="/users/sign_up" style="color:white; text-decoration:none; font-size:14px; height:50px">Sign Up</a></li>
+      <li style="float:right"><a href="/users/sign_in" style="color:white; text-decoration:none; font-size:14px; height:50px">Log In</a></li>
+    </div>
+<% end %>
 <br><br>
 
 <div class="container">
