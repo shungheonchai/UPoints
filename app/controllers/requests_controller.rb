@@ -29,6 +29,7 @@ class RequestsController < ApplicationController
   def create
     @request = Request.new(request_params)
     @request.user_id = current_user.id if current_user
+    @request.buyer = current_user.first_name+' '+ current_user.last_name
     respond_to do |format|
       if @request.save
         format.html { redirect_to requests_url, notice: 'Request was successfully created.' }
