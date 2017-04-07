@@ -19,7 +19,20 @@
     text-overflow: ellipsis;
     max-width: 200px;
   }
+  .button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 16px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 4px ;
+    cursor: pointer;
+  }
 </style>
+<a class="button" href="/requests/new" style="text-decoration:none; color:white; float:right">New Request</a>
 <div class="tab">
   <button class="tablinks" onclick="openTab(event, 'Requests')" id="defaultOpen">All Requests</button>
   <button class="tablinks" onclick="openTab(event, 'Posts')">Your Requests</button>
@@ -94,8 +107,8 @@
             <td><%= request.location %></td>
             <td><%= request.exchange_method %></td>
             <td><%= request.special_request %></td>
-            <%= link_to 'Edit', edit_request_path(request) %></td>
-            <%= link_to 'Delete', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to 'Edit', edit_request_path(request) %></td>
+            <td><%= link_to 'Delete', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
           <br>
 
