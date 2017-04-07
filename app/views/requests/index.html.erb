@@ -68,7 +68,7 @@
           <td><%= request.location %></td>
           <td><%= request.exchange_method %></td>
           <td><%= request.special_request %></td>
-          <td><%= link_to 'Accept', request %></td>
+          <td><%= link_to 'Accept', accept_request_path(id: request.id), method: :post %></td>
           <td><%= link_to 'Expand', request %></td>
       </tr>
     <% end %>
