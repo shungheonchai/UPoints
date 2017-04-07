@@ -107,7 +107,7 @@
           <%= current_user.first_name+' '+ current_user.last_name %>
         </button>
         <div class="dropdown-content" id="myDropdown">
-          <a href="users/edit">Profile</a>
+          <a href="/users/edit">Profile</a>
           <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
         </div>
       </div>
