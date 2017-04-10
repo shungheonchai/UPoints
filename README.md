@@ -1,24 +1,19 @@
-# README
+# UPoints
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Functionality
+ TBA
+## How to run it
 
-Things you may want to cover:
+#### Installing Ruby on Rails with Postgres
 
-* Ruby version
+#### Mailer
+We use SMTP local mailer called 'mailcatcher' gem. To run it follow the steps
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Install mailcatcher
+    > gem install mailcatcher
+- Run mailcatcher
+    > mailcatcher
+- Go to the mailcatcher site
+  > http://localhost:1080/
+- Send your emails away!
+  
