@@ -14,7 +14,7 @@
   }
   td {
     border-bottom: 1px solid;
-   padding: 10px;
+    padding: 10px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -68,9 +68,12 @@
           <td><%= request.location %></td>
           <td><%= request.exchange_method %></td>
           <td><%= request.special_request %></td>
-          <td><%= link_to 'Accept', accept_request_path(id: request.id), method: :post %></td>
+          <!-- The creator of the request shouldn't be able to accept his/her own. This is blocked in the backend as well -->
+          <% if request.user_id != current_user.id %>
+              <td><%= link_to 'Accept', accept_request_path(id: request.id), method: :post %></td>
+          <% end %>
           <td><%= link_to 'Expand', request %></td>
-      </tr>
+        </tr>
     <% end %>
     </tbody>
   </table>
@@ -78,36 +81,39 @@
 </div>
 
 <div id="Posts" class="tabcontent">
-    <table>
-      <thead>
-      <tr>
-        <th>Food Description</th>
-        <th>Price</th>
-        <th>Start Time</th>
-        <th>End Time</th>
-        <th>Location</th>
-        <th>Exchange Method</th>
-        <th>Special Request</th>
-        <th colspan="2" style="text-align:center">View</th>
-      </tr>
-      </thead>
+  <table>
+    <thead>
+    <tr>
+      <th>Food Description</th>
+      <th>Price</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Location</th>
+      <th>Exchange Method</th>
+      <th>Special Request</th>
+      <th colspan="2" style="text-align:center">View</th>
+    </tr>
+    </thead>
 
-      <tbody>
-      <% @user_posted_requests.each do |request| %>
-          <tr id="highlight">
-            <td style="max-width:100px;text-overflow:ellipsis"><%= request.food_description %></td>
-            <td><%= request.price %></td>
-            <td><%= request.start_time %></td>
-            <td><%= request.end_time %></td>
-            <td><%= request.location %></td>
-            <td><%= request.exchange_method %></td>
-            <td><%= request.special_request %></td>
-            <td><%= link_to 'Edit', edit_request_path(request) %></td>
-            <td><%= link_to 'Delete', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
+    <tbody>
+    <% @user_posted_requests.each do |request| %>
+        <tr id="highlight">
+          <td style="max-width:100px;text-overflow:ellipsis"><%= request.food_description %></td>
+          <td><%= request.price %></td>
+          <td><%= request.start_time %></td>
+          <td><%= request.end_time %></td>
+          <td><%= request.location %></td>
+          <td><%= request.exchange_method %></td>
+          <td><%= request.special_request %></td>
+          <!-- Only the creator of the user can edit and delete -->
+          <% if request.user_id == current_user.id %>
+              <td><%= link_to 'Edit', edit_request_path(request) %></td>
+              <td><%= link_to 'Delete', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
   <br>
 
 </div>
@@ -141,8 +147,11 @@
           <td><%= request.location %></td>
           <td><%= request.exchange_method %></td>
           <td><%= request.special_request %></td>
-          <td><%= link_to 'Edit', edit_request_path(request) %></td>
-          <td><%= link_to 'Delete', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <!-- Only the creator of the user can edit and delete -->
+          <% if request.user_id == current_user.id %>
+              <td><%= link_to 'Edit', edit_request_path(request) %></td>
+              <td><%= link_to 'Delete', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
         </tr>
     <% end %>
     </tbody>

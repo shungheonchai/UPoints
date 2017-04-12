@@ -30,29 +30,45 @@ class RequestsController < ApplicationController
     @request = Request.new(request_params)
     @request.user_id = current_user.id if current_user
     @request.buyer = current_user.first_name+' '+ current_user.last_name
-    respond_to do |format|
-      if @request.save
-        format.html { redirect_to requests_url, notice: 'Request was successfully created.' }
-        format.json { render :show, status: :created, location: @request }
-      else
-        format.html { render :new }
+    if (@request.start_time).past?
+      respond_to do |format|
+        format.html { redirect_to requests_url, notice: 'You cannot have the request time to happen in the past' }
         format.json { render json: @request.errors, status: :unprocessable_entity }
       end
+    else
+      respond_to do |format|
+        if @request.save
+          format.html { redirect_to requests_url, notice: 'Request was successfully created.' }
+          format.json { render :show, status: :created, location: @request }
+        else
+          format.html { render :new }
+          format.json { render json: @request.errors, status: :unprocessable_entity }
+        end
+      end
     end
+
   end
 
   # PATCH/PUT /requests/1
   # PATCH/PUT /requests/1.json
   def update
-    respond_to do |format|
-      if @request.update(request_params)
-        format.html { redirect_to @request, notice: 'Request was successfully updated.' }
-        format.json { render :show, status: :ok, location: @request }
-      else
-        format.html { render :edit }
+    if @request.user_other_id.present?
+      respond_to do |format|
+        format.html { redirect_to @request, notice: "You can\t edit request since someone already took the offer"}
         format.json { render json: @request.errors, status: :unprocessable_entity }
       end
+    else
+      respond_to do |format|
+        if @request.update(request_params)
+          format.html { redirect_to @request, notice: 'Request was successfully updated.' }
+          format.json { render :show, status: :ok, location: @request }
+        else
+          format.html { render :edit }
+          format.json { render json: @request.errors, status: :unprocessable_entity }
+        end
+      end
     end
+
   end
 
   def accept_request
@@ -92,6 +108,6 @@ class RequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def request_params
-      params.require(:request).permit(:buyer_rating, :seller_rating, :buyer, :seller, :food_description, :price, :time_period, :location, :exchange_method, :special_request)
+      params.require(:request).permit(:buyer_rating, :seller_rating, :buyer, :seller, :food_description, :price, :time_period, :location, :exchange_method, :special_request, :start_time)
     end
 end
