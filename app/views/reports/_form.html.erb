@@ -1,41 +1,26 @@
 <%= form_for(report) do |f| %>
-<% if report.errors.any? %>
-<div id="error_explanation">
-   <h2><%= pluralize(report.errors.count, "error") %> prohibited this report from being saved:</h2>
-   <ul>
+  <% if report.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(report.errors.count, "error") %> prohibited this report from being saved:</h2>
+
+      <ul>
       <% report.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+        <li><%= message %></li>
       <% end %>
-   </ul>
-</div>
-<% end %>
-<style>
-   table {
-   font-family: arial, sans-serif;
-   border-collapse: collapse;
-   width: 70%;
-   }
-   td, th {
-   border: 1px solid #dddddd;
-   text-align: left;
-   padding: 8px;
-   }
-</style>
-<table>
-   <div class="field">
-      <%= f.label :user_id %>
-      <%= f.text_field :user_id %>
-   </div>
-   <div class="field">
-      <%= f.label :reporting_user_id %>
-      <%= f.text_field :reporting_user_id %>
-   </div>
-   <div class="field">
-      <%= f.label :reason %>
-      <%= f.text_area :reason %>
-   </div>
-   <div class="actions">
-      <%= f.submit %>
-   </div>
-</table>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field" style="display: none">
+    <%= f.text_area :reporting_user_id, :value => params[:user_id].to_i  %>
+  </div>
+
+  <div class="field">
+    <%= f.label :reason %>
+    <%= f.text_area :reason %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
 <% end %>
