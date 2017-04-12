@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :ratings
   has_many :requests
+  has_many :reports
   after_destroy :send_bye_email
   after_create :send_welcome_email
 
