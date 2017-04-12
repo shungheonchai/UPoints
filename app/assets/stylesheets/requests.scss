@@ -40,5 +40,19 @@ div.tab button.active {
   border: 1px solid #ccc;
   border-top: none;
 }
-#highlight:hover{background-color:#707070 !important}
+
+.popup{
+  height: 30px;
+  width: 120px;
+  text-align: center;
+  vertical-align: middle;
+  background: rgba(255, 255, 255, 0.8);
+  color: #000000;
+  display:none;
+  padding-top: 8px;
+  position: fixed;
+  overflow: hidden;
+}
+
+.highlight:hover{background-color:#707070 !important}
 tr:nth-child(even){background-color: #f2f2f2}

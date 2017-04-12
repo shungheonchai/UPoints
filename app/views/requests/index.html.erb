@@ -54,8 +54,8 @@
 
     <tbody>
     <% @requests.each do |request| %>
-        <tr id="highlight" onclick="location.href='<%= url_for(request) %>';">
-          <td><%= request.buyer_rating %></td>
+        <tr class="highlight" onclick="location.href='<%= url_for(request) %>';">
+          <td><%= request.buyer_rating %><div onmousemove="movePopup(event)" class="popup">Click to expand</div></td>
           <td style="max-width:200px;text-overflow:ellipsis"><%= request.food_description %></td>
           <td>$<%= request.price %></td>
           <td><%= request.start_time %></td>
@@ -84,8 +84,8 @@
 
       <tbody>
       <% @user_posted_requests.each do |request| %>
-          <tr id="highlight" onclick="location.href='<%= url_for(request) %>';">
-            <td><%= request.seller_rating %></td>
+          <tr class="highlight" onclick="location.href='<%= url_for(request) %>';">
+            <td><%= request.seller_rating %><div class="popup">Click to expand</div></td>
             <td style="max-width:100px;text-overflow:ellipsis"><%= request.food_description %></td>
             <td>$<%= request.price %></td>
             <td><%= request.start_time %></td>
@@ -119,8 +119,8 @@
 
     <tbody>
     <% @user_accepted_requests.each do |request| %>
-        <tr id="highlight" onclick="location.href='<%= url_for(request) %>';">
-          <td><%= request.buyer_rating %></td>
+        <tr class="highlight" onclick="location.href='<%= url_for(request) %>';">
+          <td><%= request.buyer_rating %><div class="popup">Click to expand</div></td>
           <td style="width:50px;text-overflow:ellipsis"><%= request.food_description %></td>
           <td>$<%= request.price %></td>
           <td><%= request.start_time %></td>
@@ -140,7 +140,20 @@
 </div>
 
 <script>
-
+        var mouseX;
+        var mouseY;
+        $(document).mousemove( function(e) {
+          mouseX = e.pageX;
+          mouseY = e.pageY;
+        });
+        $(document).ready(function(){
+            $('.highlight').hover(function() {
+                $(this).find('.popup').css({'left':mouseX, 'top':mouseY});
+                $(this).find('.popup').show();
+            }, function() {
+                $(this).find('.popup').hide();
+            })
+        });
         function openTab(evt, cityName) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
