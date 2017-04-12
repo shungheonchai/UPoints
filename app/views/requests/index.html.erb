@@ -14,7 +14,7 @@
   }
   td {
     border-bottom: 1px solid;
-   padding: 10px;
+    padding: 10px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -57,11 +57,22 @@
         <tr id="highlight" onclick="location.href='<%= url_for(request) %>';">
           <td><%= request.buyer_rating %></td>
           <td style="max-width:200px;text-overflow:ellipsis"><%= request.food_description %></td>
-          <td><%= request.price %></td>
+          <td>$<%= request.price %></td>
           <td><%= request.start_time %></td>
           <td><%= request.end_time %></td>
           <td><%= request.location %></td>
+<<<<<<< HEAD
       </tr>
+=======
+          <td><%= request.exchange_method %></td>
+          <td><%= request.special_request %></td>
+          <!-- The creator of the request shouldn't be able to accept his/her own. This is blocked in the backend as well -->
+          <% if request.user_id != current_user.id %>
+              <td><%= link_to 'Accept', accept_request_path(id: request.id), method: :post %></td>
+          <% end %>
+          <td><%= link_to 'Expand', request %></td>
+        </tr>
+>>>>>>> f5c58b21eb1efb78218e37b34816663f15ec7172
     <% end %>
     </tbody>
   </table>
@@ -69,6 +80,7 @@
 </div>
 
 <div id="Posts" class="tabcontent">
+<<<<<<< HEAD
     <table>
       <thead>
       <tr>
@@ -94,6 +106,41 @@
       <% end %>
       </tbody>
     </table>
+=======
+  <table>
+    <thead>
+    <tr>
+      <th>Food Description</th>
+      <th>Price</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Location</th>
+      <th>Exchange Method</th>
+      <th>Special Request</th>
+      <th colspan="2" style="text-align:center">View</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @user_posted_requests.each do |request| %>
+        <tr id="highlight">
+          <td style="max-width:100px;text-overflow:ellipsis"><%= request.food_description %></td>
+          <td>$<%= request.price %></td>
+          <td><%= request.start_time %></td>
+          <td><%= request.end_time %></td>
+          <td><%= request.location %></td>
+          <td><%= request.exchange_method %></td>
+          <td><%= request.special_request %></td>
+          <!-- Only the creator of the user can edit and delete -->
+          <% if request.user_id == current_user.id %>
+              <td><%= link_to 'Edit', edit_request_path(request) %></td>
+              <td><%= link_to 'Delete', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+>>>>>>> f5c58b21eb1efb78218e37b34816663f15ec7172
   <br>
 
 </div>
@@ -115,11 +162,26 @@
     <% @user_accepted_requests.each do |request| %>
         <tr id="highlight" onclick="location.href='<%= url_for(request) %>';">
           <td><%= request.buyer_rating %></td>
+<<<<<<< HEAD
+=======
+          <td><%= request.buyer %></td>
+          <td>$<%= request.price %></td>
+>>>>>>> f5c58b21eb1efb78218e37b34816663f15ec7172
           <td style="width:50px;text-overflow:ellipsis"><%= request.food_description %></td>
           <td><%= request.price %></td>
           <td><%= request.start_time %></td>
           <td><%= request.end_time %></td>
           <td><%= request.location %></td>
+<<<<<<< HEAD
+=======
+          <td><%= request.exchange_method %></td>
+          <td><%= request.special_request %></td>
+          <!-- Only the creator of the user can edit and delete -->
+          <% if request.user_id == current_user.id %>
+              <td><%= link_to 'Edit', edit_request_path(request) %></td>
+              <td><%= link_to 'Delete', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+>>>>>>> f5c58b21eb1efb78218e37b34816663f15ec7172
         </tr>
     <% end %>
     </tbody>

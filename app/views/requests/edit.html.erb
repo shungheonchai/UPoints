@@ -1,5 +1,7 @@
 <h1>Editing Request</h1>
-
+<% if @request.user_other_id.present? %>
+    <p style="color: red">You won't be able to edit this since a user has accepted the offer</p>
+<% end %>
 <%= render 'form', request: @request %>
 
 <%= link_to 'Back', requests_path %>

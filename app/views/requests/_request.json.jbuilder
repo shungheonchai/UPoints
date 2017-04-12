@@ -1,2 +1,2 @@
-json.extract! request, :id, :buyer_rating, :seller_rating, :buyer, :seller, :food_description, :price, :time_period, :location, :exchange_method, :special_request, :created_at, :updated_at
+json.extract! request, :id, :buyer_rating, :seller_rating, :buyer, :seller, :food_description, :price, :end_time, :end_time, :location, :exchange_method, :special_request, :created_at, :updated_at
 json.url request_url(request, format: :json)
