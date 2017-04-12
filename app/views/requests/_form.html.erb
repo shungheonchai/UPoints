@@ -10,39 +10,71 @@
       </ul>
     </div>
   <% end %>
+
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 70%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+</style>
+
+  <table>
     <div class="field">
-      <%= f.label :price %>
-      <%= f.text_field :price %>
+      <tr>
+      <td><%= f.label :price %></td>
+     <td><%= f.number_field :price, :step => 0.01%></td>
+      </tr>
+    </tr>
     </div>
 
   <div class="field">
-    <%= f.label :food_description %>
-    <%= f.text_area :food_description %>
+    <tr>
+    <td><%= f.label :food_description %></td>
+    <td><%= f.text_area :food_description %></td>
+    </tr>
   </div>
 
   <div class="field">
-    <%= f.label :start_time %>
-    <%= f.datetime_select :start_time %>
+    <tr>
+    <td><%= f.label :start_time %></td>
+    <td><%= f.datetime_select :start_time %></td>
+    </tr>
   </div>
     <div class="field">
-      <%= f.label :end_time %>
-      <%= f.datetime_select :end_time %>
+      <tr>
+      <td><%= f.label :end_time %></td>
+      <td><%= f.datetime_select :end_time %></td>
+      </tr>
     </div>
 
   <div class="field">
-    <%= f.label :location %>
-    <%= f.text_field :location %>
+    <tr>
+    <td><%= f.label :location %></td>
+    <td><%= f.text_field :location %></td>
+    </tr>
   </div>
 
   <div class="field">
-    <%= f.label :exchange_method %>
-    <%= f.text_field :exchange_method %>
+    <tr>
+    <td><%= f.label :exchange_method %></td>
+    <td><%= f.select :exchange_method, [['Swipe','Swipe'],['Delivery','Delivery']] %></td>
+    </tr>
   </div>
 
   <div class="field">
-    <%= f.label :special_request %>
-    <%= f.text_area :special_request %>
+    <tr>
+    <td><%= f.label :special_request %></td>
+    <td><%= f.text_area :special_request %></td>
+     </tr>
   </div>
+</table>
 
   <div class="actions">
     <%= f.submit %>
