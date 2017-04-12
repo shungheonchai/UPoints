@@ -87,7 +87,12 @@
       <tbody>
       <% @user_posted_requests.each do |request| %>
           <tr class="highlight">
+<<<<<<< HEAD
             <td onclick="location.href='<%= url_for(request) %>';"><% if request.user_other_id==nil%>Not Accepted<% else %>Accepted<% end %><div class="popup">Click to expand</div></td><td onclick="location.href='<%= url_for(request) %>';" style="max-width:100px;text-overflow:ellipsis"><%= request.food_description %></td>
+=======
+            <td onclick="location.href='<%= url_for(request) %>';"><% if request.user_other_id==nil%>Not Accepted<% else %>Accepted<% end %><div class="popup">Click to expand</div></td>
+            <td onclick="location.href='<%= url_for(request) %>';" style="max-width:100px;text-overflow:ellipsis"><%= request.food_description %></td>
+>>>>>>> 6c795af69b6777d167b81f30f1d3adcb3b5978f6
             <td onclick="location.href='<%= url_for(request) %>';">$<%= request.price %></td>
             <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time %></td>
             <td onclick="location.href='<%= url_for(request) %>';"><%= request.end_time %></td>
@@ -130,8 +135,8 @@
           <% if request.start_time > Time.now %>
               <td colspan="2"><%= link_to 'Cancel', accept_request_path(id: request.id), method: :post %></td>
           <% else %>
-              <td><%= link_to 'Rate', new_rating_path(id: request.user_id)%></td>
-              <td><%= link_to 'Report', new_report_path(id: request.user_id)%></td>
+              <td><%= link_to 'Rate', new_rating_path(id: request.id, user_id: request.user_id)%></td>
+              <td><%= link_to 'Report', new_report_path(id: request.id, user_id: request.user_id)%></td>
           <% end %>
         </tr>
     <% end %>

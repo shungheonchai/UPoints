@@ -12,25 +12,21 @@
   <% end %>
 
   <style>
-  table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-      width: 70%;
-  }
-
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
+   table {
+   font-family: arial, sans-serif;
+   border-collapse: collapse;
+   width: 70%;
+   }
+   td, th {
+   border: 1px solid #dddddd;
+   text-align: left;
+   padding: 8px;
+   }
 </style>
 
 <table>
-  <div class="field">
-    <tr>
-    <td>Username</td>
-    <td><%= f.label :user_id%> </td>
-    </tr>
+  <div class="field" style="display: none">
+    <%= f.text_area :user_id, :value => params[:user_id].to_i  %>
   </div>
 
   <div class="field">
