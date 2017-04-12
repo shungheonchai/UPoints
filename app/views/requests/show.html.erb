@@ -14,20 +14,26 @@
 </style>
 
 <table>
-  
-<p>
-  <tr>
-  <td><strong>Rating:</strong></td>
-  <td><%= @request.buyer_rating %></td>
-  </tr>
-</p>
 
-<p>
-  <tr>
-  <td><strong>User:</strong></td>
-  <td><%= @request.buyer %></td>
-  </tr>
-</p>
+  <%if current_user.id == @request.user_id %>
+      <p>
+        <strong>Rating:</strong>
+        <%= @request.seller_rating %>
+      </p>
+      <p>
+        <strong>User:</strong>
+        <%= @request.seller %>
+      </p>
+  <%else%>
+      <p>
+        <strong>Rating:</strong>
+        <%= @request.buyer_rating %>
+      </p>
+      <p>
+        <strong>User:</strong>
+        <%= @request.buyer %>
+      </p>
+  <%end%>
 
 <p>
   <tr>
