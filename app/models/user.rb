@@ -6,9 +6,9 @@ class User < ApplicationRecord
 
   # Include default devise modules. Others available are:
   # :timeoutable and :omniauthable
-  # Todo: add this line later when email is set , :confirmable, :lockable
+  # Todo: add this line later when email is set , :lockable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
 
   def send_welcome_email
