@@ -29,7 +29,7 @@ td, th {
     <div class="field">
       <tr>
       <td><%= f.label :price %></td>
-     <td><%= f.number_field :price, :step => 0.01%></td>
+      <td><%= f.number_field :price, :step => 0.01, :min =>0, :value =>0.00%></td>
       </tr>
     </tr>
     </div>
@@ -47,6 +47,7 @@ td, th {
     <td><%= f.datetime_select :start_time %></td>
     </tr>
   </div>
+
     <div class="field">
       <tr>
       <td><%= f.label :end_time %></td>

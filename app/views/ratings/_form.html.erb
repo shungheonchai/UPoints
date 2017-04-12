@@ -11,31 +11,56 @@
     </div>
   <% end %>
 
+  <style>
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+      width: 70%;
+  }
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+</style>
+
+<table>
   <div class="field">
-    <%= f.label :user_id %>
-    <%= f.text_field :user_id %>
+    <tr>
+    <td><%= f.label :user_id %></td>
+    <td><%= f.text_field :user_id%> </td>
+    </tr>
   </div>
 
   <div class="field">
-    <%= f.label :location %>
-    <%= f.text_field :location %>
+    <tr>
+    <td><%= f.label :location %></td>
+    <td><%= f.number_field :location, :step => 1, :min =>1, :max=>5 %></td>
+    </tr>
   </div>
 
   <div class="field">
-    <%= f.label :communication %>
-    <%= f.text_field :communication %>
+    <tr>
+    <td><%= f.label :communication %></td>
+    <td><%= f.number_field :communication, :step => 1, :min =>1, :max=>5 %></td>
+    </tr>
   </div>
 
   <div class="field">
-    <%= f.label :payment %>
-    <%= f.text_field :payment %>
+    <tr>
+    <td><%= f.label :payment %></td>
+    <td><%= f.number_field :payment, :step => 1, :min =>1, :max=>5 %></td>
+    </tr>
   </div>
 
   <div class="field">
-    <%= f.label :overall %>
-    <%= f.text_field :overall %>
+    <tr>
+    <td><%= f.label :overall %></td>
+    <td><%= f.number_field :overall, :step => 1, :min =>1, :max=>5 %></td>
+    </tr>
   </div>
-
+</table>
   <div class="actions">
     <%= f.submit %>
   </div>
