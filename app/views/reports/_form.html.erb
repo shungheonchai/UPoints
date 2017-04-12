@@ -11,14 +11,8 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :user_id %>
-    <%= f.text_field :user_id %>
-  </div>
-
-  <div class="field">
-    <%= f.label :reporting_user_id %>
-    <%= f.text_field :reporting_user_id %>
+  <div class="field" style="display: none">
+    <%= f.text_area :reporting_user_id, :value => params[:user_id].to_i  %>
   </div>
 
   <div class="field">

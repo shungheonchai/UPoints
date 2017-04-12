@@ -129,8 +129,8 @@
           <% if request.start_time > Time.now %>
               <td><%= link_to 'Cancel', accept_request_path(id: request.id), method: :post %></td>
           <% else %>
-              <td><%= link_to 'Rate', new_rating_path(id: request.id)%></td>
-              <td><%= link_to 'Report', new_report_path(id: request.id)%></td>
+              <td><%= link_to 'Rate', new_rating_path(id: request.id, user_id: request.user_id)%></td>
+              <td><%= link_to 'Report', new_report_path(id: request.id, user_id: request.user_id)%></td>
           <% end %>
         </tr>
     <% end %>

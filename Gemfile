@@ -55,6 +55,9 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   # for checking mails (go to localhost:1080)
   gem 'mailcatcher'
+
+  #for debugging
+  gem 'pry'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
