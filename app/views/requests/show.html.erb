@@ -1,46 +1,83 @@
 <p id="notice"><%= notice %></p>
 
+<style>
+   table {
+   font-family: arial, sans-serif;
+   border-collapse: collapse;
+   width: 31%;
+   }
+   td, th {
+   border: 1px solid #dddddd;
+   text-align: left;
+   padding: 8px;
+   }
+</style>
+
+<table>
+  
 <p>
-  <strong>Rating:</strong>
-  <%= @request.buyer_rating %>
-</p>
-<p>
-  <strong>User:</strong>
-  <%= @request.buyer %>
-</p>
-<p>
-  <strong>Price:</strong>
-  $<%= @request.price %>
+  <tr>
+  <td><strong>Rating:</strong></td>
+  <td><%= @request.buyer_rating %></td>
+  </tr>
 </p>
 
 <p>
-  <strong>Food description:</strong>
-  <%= @request.food_description %>
+  <tr>
+  <td><strong>User:</strong></td>
+  <td><%= @request.buyer %></td>
+  </tr>
 </p>
 
 <p>
-  <strong>Start Time:</strong>
-  <%= @request.start_time %>
-</p>
-<p>
-  <strong>End Time:</strong>
-  <%= @request.end_time %>
+  <tr>
+  <td><strong>Price:</strong></td>
+  <td>$<%= @request.price %></td>
+  </tr>
 </p>
 
 <p>
-  <strong>Location:</strong>
-  <%= @request.location %>
+  <tr>
+  <td><strong>Food description:</strong></td>
+  <td><%= @request.food_description %></td>
+  </tr>
 </p>
 
 <p>
-  <strong>Exchange method:</strong>
-  <%= @request.exchange_method %>
+  <tr>
+  <td><strong>Start Time:</strong></td>
+  <td><%= @request.start_time %></td>
+  </tr>
+</p>
+<p>
+  <tr>
+  <td><strong>End Time:</strong></td>
+  <td><%= @request.end_time %></td>
+  </tr>
 </p>
 
 <p>
-  <strong>Special request:</strong>
-  <%= @request.special_request %>
+  <tr>
+  <td><strong>Location:</strong></td>
+  <td><%= @request.location %></td>
+  </tr>
 </p>
+
+<p>
+  <tr>
+  <td><strong>Exchange method:</strong></td>
+  <td><%= @request.exchange_method %></td>
+  </tr>
+</p>
+
+<p>
+  <tr>
+  <td><strong>Special request:</strong></td>
+  <td><%= @request.special_request %></td>
+  </tr>
+</p>
+</table>
+
 <%if current_user.id == @request.user_id %>
   <%= link_to 'Edit', edit_request_path(@request) %> |
   <%= link_to 'Back', requests_path %>
