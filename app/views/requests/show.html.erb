@@ -1,14 +1,5 @@
 <p id="notice"><%= notice %></p>
-<%if current_user.id == @request.user_id %>
-<p>
-  <strong>Rating:</strong>
-  <%= @request.seller_rating %>
-</p>
-<p>
-  <strong>User:</strong>
-  <%= @request.seller %>
-</p>
-<%else%>
+
 <p>
   <strong>Rating:</strong>
   <%= @request.buyer_rating %>
@@ -18,7 +9,6 @@
   <%= @request.buyer %>
 </p>
 <p>
-<%end%>
   <strong>Price:</strong>
   $<%= @request.price %>
 </p>
