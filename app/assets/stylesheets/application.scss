@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  */
+//@import url('https://fonts.googleapis.com/css?family=Roboto');
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import 'bootstrap/theme';
@@ -24,3 +25,4 @@
 .alert-notice {
   @extend .alert-info;
 }
+

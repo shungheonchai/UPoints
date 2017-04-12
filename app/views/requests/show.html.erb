@@ -41,6 +41,9 @@
   <strong>Special request:</strong>
   <%= @request.special_request %>
 </p>
-
-<%= link_to 'Edit', edit_request_path(@request) %> |
+<%if current_user.id == @request.user_id %>
+  <%= link_to 'Edit', edit_request_path(@request) %> |
+  <%= link_to 'Back', requests_path %>
+<%else%>
 <%= link_to 'Back', requests_path %>
+<%end%>

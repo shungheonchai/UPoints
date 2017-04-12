@@ -4,7 +4,7 @@ class ReportsController < ApplicationController
   # GET /reports
   # GET /reports.json
   def index
-    @reports = Report.where(user_id)
+    @reports = Report.where(user_session)
   end
 
   # GET /reports/1

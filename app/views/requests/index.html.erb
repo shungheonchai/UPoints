@@ -78,6 +78,7 @@
         <th>Start Time</th>
         <th>End Time</th>
         <th>Location</th>
+        <th colspan="2" style="text-align:center">View</th>
       </tr>
       </thead>
 
@@ -90,6 +91,10 @@
             <td><%= request.start_time %></td>
             <td><%= request.end_time %></td>
             <td><%= request.location %></td>
+            <% if request.user_id == current_user.id %>
+                <td><%= link_to 'Edit', edit_request_path(request) %></td>
+                <td><%= link_to 'Delete', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
           </tr>
       <% end %>
       </tbody>
@@ -108,6 +113,7 @@
       <th>Start Time</th>
       <th>End Time</th>
       <th>Location</th>
+      <th colspan="2" style="text-align:center">View</th>
     </tr>
     </thead>
 
@@ -120,6 +126,12 @@
           <td><%= request.start_time %></td>
           <td><%= request.end_time %></td>
           <td><%= request.location %></td>
+          <% if request.start_time > Time.now %>
+              <td><%= link_to 'Cancel', accept_request_path(id: request.id), method: :post %></td>
+          <% else %>
+              <td><%= link_to 'Rate', new_rating_path(id: request.id)%></td>
+              <td><%= link_to 'Report', new_report_path(id: request.id)%></td>
+          <% end %>
         </tr>
     <% end %>
     </tbody>
