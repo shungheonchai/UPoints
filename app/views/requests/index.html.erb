@@ -72,7 +72,7 @@
     <table>
       <thead>
       <tr>
-        <th>Seller Rating</th>
+        <th>Status</th>
         <th>Food Description</th>
         <th>Price</th>
         <th>Start Time</th>
@@ -85,7 +85,7 @@
       <tbody>
       <% @user_posted_requests.each do |request| %>
           <tr class="highlight">
-            <td onclick="location.href='<%= url_for(request) %>';"><%= request.seller_rating %><div class="popup">Click to expand</div></td>
+            <td onclick="location.href='<%= url_for(request) %>';"><% if request.user_other_id==nil%>Not Accepted<% else %>Accepted<% end %><div class="popup">Click to expand</div></td>
             <td onclick="location.href='<%= url_for(request) %>';" style="max-width:100px;text-overflow:ellipsis"><%= request.food_description %></td>
             <td onclick="location.href='<%= url_for(request) %>';">$<%= request.price %></td>
             <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time %></td>
