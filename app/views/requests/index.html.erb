@@ -44,32 +44,23 @@
     <thead>
     <tr>
       <th>Rating</th>
-      <th>Poster</th>
       <th>Food Description</th>
       <th>Price</th>
       <th>Start Time</th>
       <th>End Time</th>
       <th>Location</th>
-      <th>Exchange Method</th>
-      <th>Special Request</th>
-      <th colspan="2" style="text-align:center">View</th>
     </tr>
     </thead>
 
     <tbody>
     <% @requests.each do |request| %>
-        <tr id="highlight">
+        <tr id="highlight" onclick="location.href='<%= url_for(request) %>';">
           <td><%= request.buyer_rating %></td>
-          <td><%= request.buyer %></td>
           <td style="max-width:200px;text-overflow:ellipsis"><%= request.food_description %></td>
           <td><%= request.price %></td>
           <td><%= request.start_time %></td>
           <td><%= request.end_time %></td>
           <td><%= request.location %></td>
-          <td><%= request.exchange_method %></td>
-          <td><%= request.special_request %></td>
-          <td><%= link_to 'Accept', accept_request_path(id: request.id), method: :post %></td>
-          <td><%= link_to 'Expand', request %></td>
       </tr>
     <% end %>
     </tbody>
@@ -81,29 +72,24 @@
     <table>
       <thead>
       <tr>
+        <th>Seller Rating</th>
         <th>Food Description</th>
         <th>Price</th>
         <th>Start Time</th>
         <th>End Time</th>
         <th>Location</th>
-        <th>Exchange Method</th>
-        <th>Special Request</th>
-        <th colspan="2" style="text-align:center">View</th>
       </tr>
       </thead>
 
       <tbody>
       <% @user_posted_requests.each do |request| %>
-          <tr id="highlight">
+          <tr id="highlight" onclick="location.href='<%= url_for(request) %>';">
+            <td><%= request.seller_rating %></td>
             <td style="max-width:100px;text-overflow:ellipsis"><%= request.food_description %></td>
             <td><%= request.price %></td>
             <td><%= request.start_time %></td>
             <td><%= request.end_time %></td>
             <td><%= request.location %></td>
-            <td><%= request.exchange_method %></td>
-            <td><%= request.special_request %></td>
-            <td><%= link_to 'Edit', edit_request_path(request) %></td>
-            <td><%= link_to 'Delete', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
       <% end %>
       </tbody>
@@ -117,32 +103,23 @@
     <thead>
     <tr>
       <th>Rating</th>
-      <th>Poster</th>
-      <th>Price</th>
       <th>Food Description</th>
+      <th>Price</th>
       <th>Start Time</th>
       <th>End Time</th>
       <th>Location</th>
-      <th>Exchange Method</th>
-      <th>Special Request</th>
-      <th colspan="2" style="text-align:center">View</th>
     </tr>
     </thead>
 
     <tbody>
     <% @user_accepted_requests.each do |request| %>
-        <tr id="highlight">
+        <tr id="highlight" onclick="location.href='<%= url_for(request) %>';">
           <td><%= request.buyer_rating %></td>
-          <td><%= request.buyer %></td>
-          <td><%= request.price %></td>
           <td style="width:50px;text-overflow:ellipsis"><%= request.food_description %></td>
+          <td><%= request.price %></td>
           <td><%= request.start_time %></td>
           <td><%= request.end_time %></td>
           <td><%= request.location %></td>
-          <td><%= request.exchange_method %></td>
-          <td><%= request.special_request %></td>
-          <td><%= link_to 'Edit', edit_request_path(request) %></td>
-          <td><%= link_to 'Delete', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
     <% end %>
     </tbody>
@@ -151,7 +128,8 @@
 </div>
 
 <script>
-    function openTab(evt, cityName) {
+
+        function openTab(evt, cityName) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
         for (i = 0; i < tabcontent.length; i++) {
