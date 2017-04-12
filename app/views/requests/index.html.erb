@@ -54,13 +54,13 @@
 
     <tbody>
     <% @requests.each do |request| %>
-        <tr id="highlight" onclick="location.href='<%= url_for(request) %>';">
-          <td><%= request.buyer_rating %></td>
-          <td style="max-width:200px;text-overflow:ellipsis"><%= request.food_description %></td>
-          <td>$<%= request.price %></td>
-          <td><%= request.start_time %></td>
-          <td><%= request.end_time %></td>
-          <td><%= request.location %></td>
+        <tr class="highlight">
+          <td onclick="location.href='<%= url_for(request) %>';"><%= request.buyer_rating %><div onmousemove="movePopup(event)" class="popup">Click to expand</div></td>
+          <td onclick="location.href='<%= url_for(request) %>';" style="max-width:200px;text-overflow:ellipsis"><%= request.food_description %></td>
+          <td onclick="location.href='<%= url_for(request) %>';">$<%= request.price %></td>
+          <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time %></td>
+          <td onclick="location.href='<%= url_for(request) %>';"><%= request.end_time %></td>
+          <td onclick="location.href='<%= url_for(request) %>';"><%= request.location %></td>
       </tr>
     <% end %>
     </tbody>
@@ -84,13 +84,13 @@
 
       <tbody>
       <% @user_posted_requests.each do |request| %>
-          <tr id="highlight" onclick="location.href='<%= url_for(request) %>';">
-            <td><%= request.seller_rating %></td>
-            <td style="max-width:100px;text-overflow:ellipsis"><%= request.food_description %></td>
-            <td>$<%= request.price %></td>
-            <td><%= request.start_time %></td>
-            <td><%= request.end_time %></td>
-            <td><%= request.location %></td>
+          <tr class="highlight">
+            <td onclick="location.href='<%= url_for(request) %>';"><%= request.seller_rating %><div class="popup">Click to expand</div></td>
+            <td onclick="location.href='<%= url_for(request) %>';" style="max-width:100px;text-overflow:ellipsis"><%= request.food_description %></td>
+            <td onclick="location.href='<%= url_for(request) %>';">$<%= request.price %></td>
+            <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time %></td>
+            <td onclick="location.href='<%= url_for(request) %>';"><%= request.end_time %></td>
+            <td onclick="location.href='<%= url_for(request) %>';"><%= request.location %></td>
             <% if request.user_id == current_user.id %>
                 <td><%= link_to 'Edit', edit_request_path(request) %></td>
                 <td><%= link_to 'Delete', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -119,13 +119,13 @@
 
     <tbody>
     <% @user_accepted_requests.each do |request| %>
-        <tr id="highlight" onclick="location.href='<%= url_for(request) %>';">
-          <td><%= request.buyer_rating %></td>
-          <td style="width:50px;text-overflow:ellipsis"><%= request.food_description %></td>
-          <td>$<%= request.price %></td>
-          <td><%= request.start_time %></td>
-          <td><%= request.end_time %></td>
-          <td><%= request.location %></td>
+        <tr class="highlight">
+          <td onclick="location.href='<%= url_for(request) %>';"><%= request.buyer_rating %><div class="popup">Click to expand</div></td>
+          <td onclick="location.href='<%= url_for(request) %>';" style="width:50px;text-overflow:ellipsis"><%= request.food_description %></td>
+          <td onclick="location.href='<%= url_for(request) %>';">$<%= request.price %></td>
+          <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time %></td>
+          <td onclick="location.href='<%= url_for(request) %>';"><%= request.end_time %></td>
+          <td onclick="location.href='<%= url_for(request) %>';"><%= request.location %></td>
           <% if request.start_time > Time.now %>
               <td colspan="2"><%= link_to 'Cancel', accept_request_path(id: request.id), method: :post %></td>
           <% else %>
@@ -140,7 +140,20 @@
 </div>
 
 <script>
-
+//        var mouseX;
+//        var mouseY;
+//        $(document).mousemove( function(e) {
+//          mouseX = e.pageX;
+//          mouseY = e.pageY;
+//        });
+        $(document).ready(function(){
+            $('.highlight').hover(function() {
+//                $(this).find('.popup').css({'left':mouseX, 'top':mouseY});
+                $(this).find('.popup').show();
+            }, function() {
+                $(this).find('.popup').hide();
+            })
+        });
         function openTab(evt, cityName) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
