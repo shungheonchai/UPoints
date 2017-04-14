@@ -58,7 +58,7 @@
         <tr class="highlight">
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.buyer_rating %><div onmousemove="movePopup(event)" class="popup">Click to expand</div></td>
           <td onclick="location.href='<%= url_for(request) %>';" style="max-width:200px;text-overflow:ellipsis"><%= request.food_description %></td>
-          <td onclick="location.href='<%= url_for(request) %>';">$<%= request.price %></td>
+          <td onclick="location.href='<%= url_for(request) %>';">$<%= number_with_precision(request.price, :precision => 2) %></td>
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time %></td>
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.end_time %></td>
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.location %></td>
@@ -89,7 +89,7 @@
           <tr class="highlight">
             <td onclick="location.href='<%= url_for(request) %>';"><% if request.user_other_id==nil%>Not Accepted<% else %>Accepted<% end %><div class="popup">Click to expand</div></td>
             <td onclick="location.href='<%= url_for(request) %>';" style="max-width:100px;text-overflow:ellipsis"><%= request.food_description %></td>
-            <td onclick="location.href='<%= url_for(request) %>';">$<%= request.price %></td>
+            <td onclick="location.href='<%= url_for(request) %>';">$<%= number_with_precision(request.price, :precision => 2) %></td>
             <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time %></td>
             <td onclick="location.href='<%= url_for(request) %>';"><%= request.end_time %></td>
             <td onclick="location.href='<%= url_for(request) %>';"><%= request.location %></td>
@@ -124,7 +124,7 @@
         <tr class="highlight">
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.buyer_rating %><div class="popup">Click to expand</div></td>
           <td onclick="location.href='<%= url_for(request) %>';" style="width:50px;text-overflow:ellipsis"><%= request.food_description %></td>
-          <td onclick="location.href='<%= url_for(request) %>';">$<%= request.price %></td>
+          <td onclick="location.href='<%= url_for(request) %>';">$<%= number_with_precision(request.price, :precision => 2) %></td>
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time %></td>
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.end_time %></td>
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.location %></td>
