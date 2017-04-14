@@ -108,6 +108,6 @@ class RequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def request_params
-      params.require(:request).permit(:buyer_rating, :seller_rating, :buyer, :seller, :food_description, :price, :time_period, :location, :exchange_method, :special_request, :start_time)
+      params.require(:request).permit(:buyer_rating, :seller_rating, :buyer, :seller, :food_description, :price, :end_time, :location, :exchange_method, :special_request, :start_time)
     end
 end

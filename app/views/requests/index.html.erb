@@ -46,6 +46,7 @@
       <th>Rating</th>
       <th>Food Description</th>
       <th>Price</th>
+      <th>Date</th>
       <th>Start Time</th>
       <th>End Time</th>
       <th>Location</th>
@@ -59,8 +60,9 @@
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.buyer_rating %><div onmousemove="movePopup(event)" class="popup">Click to expand</div></td>
           <td onclick="location.href='<%= url_for(request) %>';" style="max-width:200px;text-overflow:ellipsis"><%= request.food_description %></td>
           <td onclick="location.href='<%= url_for(request) %>';">$<%= number_with_precision(request.price, :precision => 2) %></td>
-          <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time %></td>
-          <td onclick="location.href='<%= url_for(request) %>';"><%= request.end_time %></td>
+          <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time.strftime("%B %d, %Y") %></td>
+          <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time.strftime('%I:%M:%S %p') %></td>
+          <td onclick="location.href='<%= url_for(request) %>';"><%= request.end_time.strftime('%I:%M:%S %p') %></td>
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.location %></td>
       </tr>
       <%end%>
@@ -77,6 +79,7 @@
         <th>Status</th>
         <th>Food Description</th>
         <th>Price</th>
+        <th>Date</th>
         <th>Start Time</th>
         <th>End Time</th>
         <th>Location</th>
@@ -90,8 +93,9 @@
             <td onclick="location.href='<%= url_for(request) %>';"><% if request.user_other_id==nil%>Not Accepted<% else %>Accepted<% end %><div class="popup">Click to expand</div></td>
             <td onclick="location.href='<%= url_for(request) %>';" style="max-width:100px;text-overflow:ellipsis"><%= request.food_description %></td>
             <td onclick="location.href='<%= url_for(request) %>';">$<%= number_with_precision(request.price, :precision => 2) %></td>
-            <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time %></td>
-            <td onclick="location.href='<%= url_for(request) %>';"><%= request.end_time %></td>
+            <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time.strftime("%B %d, %Y") %></td>
+          <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time.strftime('%I:%M:%S %p') %></td>
+          <td onclick="location.href='<%= url_for(request) %>';"><%= request.end_time.strftime('%I:%M:%S %p') %></td>
             <td onclick="location.href='<%= url_for(request) %>';"><%= request.location %></td>
             <% if request.user_id == current_user.id %>
                 <td><%= link_to 'Edit', edit_request_path(request) %></td>
@@ -112,6 +116,7 @@
       <th>Poster Rating</th>
       <th>Food Description</th>
       <th>Price</th>
+      <th>Date</th>
       <th>Start Time</th>
       <th>End Time</th>
       <th>Location</th>
@@ -125,8 +130,9 @@
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.buyer_rating %><div class="popup">Click to expand</div></td>
           <td onclick="location.href='<%= url_for(request) %>';" style="width:50px;text-overflow:ellipsis"><%= request.food_description %></td>
           <td onclick="location.href='<%= url_for(request) %>';">$<%= number_with_precision(request.price, :precision => 2) %></td>
-          <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time %></td>
-          <td onclick="location.href='<%= url_for(request) %>';"><%= request.end_time %></td>
+           <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time.strftime("%B %d, %Y") %></td>
+          <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time.strftime('%I:%M:%S %p') %></td>
+          <td onclick="location.href='<%= url_for(request) %>';"><%= request.end_time.strftime('%I:%M:%S %p') %></td>
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.location %></td>
           <% if request.start_time > Time.now %>
               <td colspan="2"><%= link_to 'Cancel', accept_request_path(id: request.id), method: :post %></td>
@@ -173,4 +179,3 @@
     // Get the element with id="defaultOpen" and click on it
     document.getElementById("defaultOpen").click();
 </script>
-

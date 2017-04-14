@@ -7,7 +7,8 @@ class CreateRequests < ActiveRecord::Migration[5.0]
       t.string :seller
       t.text :food_description
       t.float :price
-      t.datetime :time_period
+      t.datetime :start_time
+      t.datetime :end_time
       t.string :location
       t.string :exchange_method
       t.text :special_request
