@@ -50,15 +50,22 @@
 </p>
 
 <p>
+ <tr>
+  <td><strong>Date:</strong></td>
+  <td><%= @request.start_time.strftime("%B %d, %Y") %></td>
+  </tr>
+</p>
+
+<p>
   <tr>
   <td><strong>Start Time:</strong></td>
-  <td><%= @request.start_time %></td>
+  <td><%= @request.start_time.strftime('%I:%M:%S %p') %></td>
   </tr>
 </p>
 <p>
   <tr>
   <td><strong>End Time:</strong></td>
-  <td><%= @request.end_time %></td>
+  <td><%= @request.end_time.strftime('%I:%M:%S %p') %></td>
   </tr>
 </p>
 
