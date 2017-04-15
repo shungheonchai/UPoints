@@ -41,7 +41,6 @@ ActiveRecord::Schema.define(version: 20170412025821) do
     t.text     "food_description"
     t.float    "price"
     t.datetime "start_time"
-    t.datetime "end_time"
     t.string   "location"
     t.string   "exchange_method"
     t.text     "special_request"
@@ -49,7 +48,7 @@ ActiveRecord::Schema.define(version: 20170412025821) do
     t.datetime "updated_at",       null: false
     t.integer  "user_id"
     t.integer  "user_other_id"
-
+    t.datetime "end_time"
   end
 
   create_table "users", force: :cascade do |t|
