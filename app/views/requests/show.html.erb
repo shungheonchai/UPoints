@@ -20,13 +20,25 @@
       <p>
         <tr>
           <td><strong>Rating:</strong></td>
-          <td><%= @request.seller_rating %></td>
+          <td>
+            <% if @other_user.present? %>
+                <%= @other_user.accum_seller_rating %>
+            <% else %>
+                Has Not Been Accepted Yet
+            <% end %>
+          </td>
         </tr>
       </p>
       <p>
         <tr>
           <td><strong>User:</strong></td>
-          <td><%= @request.seller %></td>
+          <td>
+            <% if @other_user.present? %>
+                <%= @other_user.first_name %>
+            <% else %>
+                Has Not Been Accepted Yet
+            <% end %>
+          </td>
         </tr>
       </p>
   <%else%>
@@ -59,25 +71,25 @@
     </tr>
   </p>
 
-<p>
- <tr>
-  <td><strong>Date:</strong></td>
-  <td><%= @request.start_time.strftime("%B %d, %Y") %></td>
-  </tr>
-</p>
+  <p>
+    <tr>
+      <td><strong>Date:</strong></td>
+      <td><%= @request.start_time.strftime("%B %d, %Y") %></td>
+    </tr>
+  </p>
 
-<p>
-  <tr>
-  <td><strong>Start Time:</strong></td>
-  <td><%= @request.start_time.strftime('%I:%M:%S %p') %></td>
-  </tr>
-</p>
-<p>
-  <tr>
-  <td><strong>End Time:</strong></td>
-  <td><%= @request.end_time.strftime('%I:%M:%S %p') %></td>
-  </tr>
-</p>
+  <p>
+    <tr>
+      <td><strong>Start Time:</strong></td>
+      <td><%= @request.start_time.strftime('%I:%M:%S %p') %></td>
+    </tr>
+  </p>
+  <p>
+    <tr>
+      <td><strong>End Time:</strong></td>
+      <td><%= @request.end_time.strftime('%I:%M:%S %p') %></td>
+    </tr>
+  </p>
 
   <p>
     <tr>

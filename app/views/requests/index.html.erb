@@ -99,10 +99,10 @@
             <td onclick="location.href='<%= url_for(request) %>';"><%= request.location %></td>
             <% if request.user_other_id == nil %>
                 <td><%= link_to 'Edit', edit_request_path(request) %></td>
-                <td><%= link_to 'Delete', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <td><%= link_to 'Delete', request, method: :delete, data: { confirm: 'Are you sure you want to delete this request?' } %></td>
             <% else %>
                 <td><%= link_to 'Rate', new_rating_path(id: request.id, user_id: request.user_id)%></td>
-                <td><%= link_to 'Cancel', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <td><%= link_to 'Cancel', request, method: :delete, data: { confirm: 'Are you sure you want to cancel this request?' } %></td>
             <% end %>
           </tr>
       <% end %>
