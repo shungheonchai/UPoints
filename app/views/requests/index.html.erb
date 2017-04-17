@@ -14,7 +14,7 @@
   }
   td {
     border-bottom: 1px solid;
-   padding: 10px;
+    padding: 10px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -56,16 +56,16 @@
     <tbody>
     <% @requests.each do |request| %>
         <% if (request.user_other_id == nil) %>
-        <tr class="highlight">
-          <td onclick="location.href='<%= url_for(request) %>';"><%= request.buyer_rating %><div onmousemove="movePopup(event)" class="popup">Click to expand</div></td>
-          <td onclick="location.href='<%= url_for(request) %>';" style="max-width:200px;text-overflow:ellipsis"><%= request.food_description %></td>
-          <td onclick="location.href='<%= url_for(request) %>';">$<%= number_with_precision(request.price, :precision => 2) %></td>
-          <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time.strftime("%B %d") %></td>
-          <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time.strftime('%I:%M %p') %></td>
-          <td onclick="location.href='<%= url_for(request) %>';"><%= request.end_time.strftime('%I:%M %p') %></td>
-          <td onclick="location.href='<%= url_for(request) %>';"><%= request.location %></td>
-      </tr>
-      <%end%>
+            <tr class="highlight">
+              <td onclick="location.href='<%= url_for(request) %>';"><%= request.buyer_rating %><div onmousemove="movePopup(event)" class="popup">Click to expand</div></td>
+              <td onclick="location.href='<%= url_for(request) %>';" style="max-width:200px;text-overflow:ellipsis"><%= request.food_description %></td>
+              <td onclick="location.href='<%= url_for(request) %>';">$<%= number_with_precision(request.price, :precision => 2) %></td>
+              <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time.strftime("%B %d") %></td>
+              <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time.strftime('%I:%M %p') %></td>
+              <td onclick="location.href='<%= url_for(request) %>';"><%= request.end_time.strftime('%I:%M %p') %></td>
+              <td onclick="location.href='<%= url_for(request) %>';"><%= request.location %></td>
+            </tr>
+        <%end%>
     <% end %>
     </tbody>
   </table>
@@ -73,41 +73,43 @@
 </div>
 
 <div id="Posts" class="tabcontent">
-    <table>
-      <thead>
-      <tr>
-        <th>Status</th>
-        <th>Food Description</th>
-        <th>Price</th>
-        <th>Date</th>
-        <th>Start Time</th>
-        <th>End Time</th>
-        <th>Location</th>
-        <th colspan="2" style="text-align:center">View</th>
-      </tr>
-      </thead>
+  <table>
+    <thead>
+    <tr>
+      <th>Status</th>
+      <th>Food Description</th>
+      <th>Price</th>
+      <th>Date</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Location</th>
+      <th colspan="2" style="text-align:center">View</th>
+    </tr>
+    </thead>
 
-      <tbody>
-      <% @user_posted_requests.each do |request| %>
-          <tr class="highlight">
-            <td onclick="location.href='<%= url_for(request) %>';"><% if request.user_other_id==nil%>Not Accepted<% else %>Accepted<% end %><div class="popup">Click to expand</div></td>
-            <td onclick="location.href='<%= url_for(request) %>';" style="max-width:100px;text-overflow:ellipsis"><%= request.food_description %></td>
-            <td onclick="location.href='<%= url_for(request) %>';">$<%= number_with_precision(request.price, :precision => 2) %></td>
-            <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time.strftime("%B %d") %></td>
+    <tbody>
+    <% @user_posted_requests.each do |request| %>
+        <tr class="highlight">
+          <td onclick="location.href='<%= url_for(request) %>';"><% if request.user_other_id==nil%>Not Accepted<% else %>Accepted<% end %><div class="popup">Click to expand</div></td>
+          <td onclick="location.href='<%= url_for(request) %>';" style="max-width:100px;text-overflow:ellipsis"><%= request.food_description %></td>
+          <td onclick="location.href='<%= url_for(request) %>';">$<%= number_with_precision(request.price, :precision => 2) %></td>
+          <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time.strftime("%B %d") %></td>
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time.strftime('%I:%M %p') %></td>
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.end_time.strftime('%I:%M %p') %></td>
-            <td onclick="location.href='<%= url_for(request) %>';"><%= request.location %></td>
-            <% if request.user_other_id == nil %>
-                <td><%= link_to 'Edit', edit_request_path(request) %></td>
-                <td><%= link_to 'Delete', request, method: :delete, data: { confirm: 'Are you sure you want to delete this request?' } %></td>
-            <% else %>
-                <td><%= link_to 'Rate', new_rating_path(id: request.id, user_id: request.user_id)%></td>
-                <td><%= link_to 'Cancel', request, method: :delete, data: { confirm: 'Are you sure you want to cancel this request?' } %></td>
-            <% end %>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
+          <td onclick="location.href='<%= url_for(request) %>';"><%= request.location %></td>
+          <% if request.user_other_id == nil %>
+              <td><%= link_to 'Edit', edit_request_path(request) %></td>
+              <td><%= link_to 'Delete', request, method: :delete, data: { confirm: 'Are you sure you want to delete this request?' } %></td>
+          <% elsif request.start_time < Time.now %>
+              <td><%= link_to 'Rate', new_rating_path(id: request.id, user_id: request.user_id)%></td>
+              <td><%= link_to 'Cancel', request, method: :delete, data: { confirm: 'Are you sure you want to cancel this request?' } %></td>
+          <% else %>
+              <td><%= link_to 'Rate', new_rating_path(id: request.id, user_id: request.user_id)%></td>
+          <% end %>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
   <br>
 
 </div>
@@ -133,7 +135,7 @@
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.buyer_rating %><div class="popup">Click to expand</div></td>
           <td onclick="location.href='<%= url_for(request) %>';" style="width:50px;text-overflow:ellipsis"><%= request.food_description %></td>
           <td onclick="location.href='<%= url_for(request) %>';">$<%= number_with_precision(request.price, :precision => 2) %></td>
-           <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time.strftime("%B %d") %></td>
+          <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time.strftime("%B %d") %></td>
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time.strftime('%I:%M %p') %></td>
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.end_time.strftime('%I:%M %p') %></td>
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.location %></td>
@@ -141,7 +143,6 @@
               <td colspan="2"><%= link_to 'Cancel', accept_request_path(id: request.id), method: :post %></td>
           <% else %>
               <td><%= link_to 'Rate', new_rating_path(id: request.id, user_id: request.user_id)%></td>
-              <td><%= link_to 'Report', new_report_path(id: request.id, user_id: request.user_id)%></td>
           <% end %>
         </tr>
     <% end %>
@@ -151,21 +152,21 @@
 </div>
 
 <script>
-//        var mouseX;
-//        var mouseY;
-//        $(document).mousemove( function(e) {
-//          mouseX = e.pageX;
-//          mouseY = e.pageY;
-//        });
-        $(document).ready(function(){
-            $('.highlight').hover(function() {
+    //        var mouseX;
+    //        var mouseY;
+    //        $(document).mousemove( function(e) {
+    //          mouseX = e.pageX;
+    //          mouseY = e.pageY;
+    //        });
+    $(document).ready(function(){
+        $('.highlight').hover(function() {
 //                $(this).find('.popup').css({'left':mouseX, 'top':mouseY});
-                $(this).find('.popup').show();
-            }, function() {
-                $(this).find('.popup').hide();
-            })
-        });
-        function openTab(evt, cityName) {
+            $(this).find('.popup').show();
+        }, function() {
+            $(this).find('.popup').hide();
+        })
+    });
+    function openTab(evt, cityName) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
         for (i = 0; i < tabcontent.length; i++) {

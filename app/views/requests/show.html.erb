@@ -113,8 +113,18 @@
   </p>
 </table>
 
-<%if current_user.id == @request.user_id %>
+<%if current_user.id == @request.user_id && @request.start_time < Time.now %>
     <%= link_to 'Edit', edit_request_path(@request) %> |
+    <%= link_to 'Back', requests_path %>
+<% elsif current_user.id == @request.user_id %>
+    <%= link_to 'Rate', requests_path %> |
+    <%= link_to 'Back', requests_path %>
+<%elsif current_user.id == @request.user_other_id && @request.start_time < Time.now%>
+    <%= link_to 'Cancel', requests_path %> |
+    <%= link_to 'Back', requests_path %>
+<%elsif current_user.id == @request.user_other_id %>
+    <%= link_to 'Rate', requests_path %> |
+    <%= link_to 'Cancel', requests_path %> |
     <%= link_to 'Back', requests_path %>
 <%elsif current_user.id != @request.user_other_id %>
     <%= link_to 'Accept', accept_request_path(id: @request.id), method: :post %> |
