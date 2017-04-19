@@ -134,7 +134,7 @@
 <%elsif current_user.id == @request.user_other_id %>
     <%= link_to 'Rate', requests_path %> |
     <%= link_to 'Back', requests_path %>
-<%elsif current_user.id != @request.user_other_id && current_user.id != @request.user_id %>
+<%elsif current_user.id != @request.user_other_id && current_user.id != @request.user_id && Time.now < @request.end_time%>
     <%= link_to 'Accept', accept_request_path(id: @request.id), method: :post %> |
     <%= link_to 'Back', requests_path %>
 <%else %>

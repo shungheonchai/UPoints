@@ -10,21 +10,21 @@
 
     <div class="field">
       <%= f.label :first_name %><br />
-      <%= f.text_field :first_name , class: 'form-control'%>
+      <%= f.text_field :first_name , class: 'form-control', :required => true%>
     </div>
 
     <div class="field">
       <%= f.label :last_name %><br />
-      <%= f.text_field :last_name , class: 'form-control'%>
+      <%= f.text_field :last_name , class: 'form-control', :required => true%>
     </div>
 
     <div class="field">
       <%= f.label :phone_number %><br />
-      <%= f.text_field :phone_number , class: 'form-control'%>
+      <%= f.text_field :phone_number , class: 'form-control', :required => true%>
     </div>
 
     <div class="field">
-      <%= f.radio_button :grade, 'freshmen' %>
+      <%= f.radio_button :grade, 'freshmen', :checked => true %>
       <%= label :contactmethod_freshmen, 'Freshmen' %>
       <%= f.radio_button :grade, 'sophomore' %>
       <%= label :contactmethod_sophomore, 'Sophomore' %>

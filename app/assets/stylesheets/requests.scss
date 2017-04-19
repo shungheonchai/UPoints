@@ -53,6 +53,11 @@ div.tab button.active {
   position: fixed;
   overflow: hidden;
 }
+td.required:after{
+  content:"*";
+  color: red;
+}
+
 
 .highlight:hover{background-color:#707070 !important}
 tr:nth-child(even){background-color: #f2f2f2}
