@@ -13,6 +13,11 @@ class RequestsController < ApplicationController
   # GET /requests/1
   # GET /requests/1.json
   def show
+    if @request.user_other_id.present?
+      @other_user = User.find(id:@request.user_other_id)
+    else
+      @other_user = nil
+    end
   end
 
   # GET /requests/new

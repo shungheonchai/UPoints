@@ -29,43 +29,43 @@
 
     <div class="field">
       <tr>
-      <td><%= f.label :price %></td>
-      <td><%= f.number_field :price, :step => 0.01, :min =>0, :value =>0.00, :precision =>2 %></td>
+      <td class="required"><%= f.label :price %></td>
+      <td><%= f.number_field :price, :step => 0.01, :min =>0, :value =>0.00, :precision =>2, :required => true %></td>
       </tr>
     </tr>
     </div>
 
   <div class="field">
     <tr>
-    <td><%= f.label :food_description %></td>
-    <td><%= f.text_area :food_description %></td>
+    <td class="required"><%= f.label :food_description %></td>
+    <td><%= f.text_area :food_description, :required => true %></td>
     </tr>
   </div>
 
   <div class="field">
     <tr>
-    <td><%= f.label :start_time %></td>
+    <td class="required"><%= f.label :start_time %></td>
     <td><%= f.datetime_select :start_time, :ampm =>true %></td>
     </tr>
   </div>
 
     <div class="field">
       <tr>
-      <td><%= f.label :end_time %></td>
+      <td class="required"><%= f.label :end_time %></td>
       <td><%= f.datetime_select :end_time, :ampm =>true%></td>
       </tr>
     </div>
 
   <div class="field">
     <tr>
-    <td><%= f.label :location %></td>
-    <td><%= f.text_field :location %></td>
+    <td class="required"><%= f.label :location %></td>
+    <td><%= f.text_field :location, :required => true %></td>
     </tr>
   </div>
 
   <div class="field">
     <tr>
-    <td><%= f.label :exchange_method %></td>
+    <td class="required"><%= f.label :exchange_method %></td>
     <td><%= f.select :exchange_method, [['Swipe','Swipe'],['Delivery','Delivery']] %></td>
     </tr>
   </div>

@@ -87,3 +87,7 @@ div {
 label {
   display: block;
 }
+span.required:after{
+  content:"*";
+  color: red;
+}
