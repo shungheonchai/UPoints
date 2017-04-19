@@ -113,7 +113,7 @@
   </p>
 </table>
 
-<%if current_user.id == @request.user_id && @request.end_time > Time.now && @request.user_other_id == nil %>
+<%if current_user.id == @request.user_id %>
     <%= link_to 'Edit', edit_request_path(@request) %> |
     <%= link_to 'Back', requests_path %>
 <% elsif current_user.id == @request_user_id && @request.user_other_id != nil && @request.start_time > Time.now %>
