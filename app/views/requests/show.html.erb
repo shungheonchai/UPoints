@@ -20,27 +20,27 @@
       <p>
         <tr>
           <td><strong>Rating:</strong></td>
-          <td><%= @request.seller_rating %></td>
+          <td><%= @request.acceptor_rating %></td>
         </tr>
       </p>
       <p>
         <tr>
           <td><strong>User:</strong></td>
-          <td><%= @request.seller %></td>
+          <td><%= @request.acceptor_name %></td>
         </tr>
       </p>
   <%else%>
-      <h1>Showing <%= @request.buyer %>'s Request</h1>
+      <h1>Showing <%= @request.poster_name %>'s Request</h1>
       <p>
         <tr>
           <td><strong>Rating:</strong></td>
-          <td><%= @request.buyer_rating %></td>
+          <td><%= @request.poster_rating %></td>
         </tr>
       </p>
       <p>
         <tr>
           <td><strong>User:</strong></td>
-          <td><%= @request.buyer %></td>
+          <td><%= @request.poster_name %></td>
         </tr>
       </p>
   <%end%>

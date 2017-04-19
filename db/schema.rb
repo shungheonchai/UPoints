@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170412025821) do
+ActiveRecord::Schema.define(version: 20170415194526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20170412025821) do
     t.integer  "overall"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.string   "request_id"
   end
 
   create_table "reports", force: :cascade do |t|
@@ -34,10 +35,10 @@ ActiveRecord::Schema.define(version: 20170412025821) do
   end
 
   create_table "requests", force: :cascade do |t|
-    t.integer  "buyer_rating"
-    t.integer  "seller_rating"
-    t.string   "buyer"
-    t.string   "seller"
+    t.integer  "poster_rating"
+    t.integer  "acceptor_rating"
+    t.string   "poster_name"
+    t.string   "acceptor_name"
     t.text     "food_description"
     t.float    "price"
     t.datetime "start_time"
@@ -71,8 +72,8 @@ ActiveRecord::Schema.define(version: 20170412025821) do
     t.string   "notification_method",    default: [],              array: true
     t.string   "notification_time",      default: [],              array: true
     t.string   "location_preference",    default: [],              array: true
-    t.float    "accum_buyer_rating"
-    t.float    "accum_seller_rating"
+    t.float    "accum_poster_rating"
+    t.float    "accum_acceptor_rating"
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
