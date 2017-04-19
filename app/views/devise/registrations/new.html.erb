@@ -4,23 +4,23 @@
     <%= devise_error_messages! %>
 
     <div class="field">
-      <%= f.label :email %><br />
+      <span class="required"><%= f.label :email %></span><br />
       <%= f.email_field :email, autofocus: true , class: 'form-control'%>
     </div>
 
     <div class="field">
-      <%= f.label :first_name %><br />
+      <span class="required"><%= f.label :first_name %></span><br />
       <%= f.text_field :first_name , class: 'form-control', :required => true%>
     </div>
 
     <div class="field">
-      <%= f.label :last_name %><br />
+      <span class="required"><%= f.label :last_name %></span><br />
       <%= f.text_field :last_name , class: 'form-control', :required => true%>
     </div>
 
     <div class="field">
-      <%= f.label :phone_number %><br />
-      <%= f.text_field :phone_number , class: 'form-control', :required => true%>
+      <span class="required"><%= f.label :phone_number %></span><br />
+      <%= f.text_field :phone_number, class: 'form-control', :required => true %>
     </div>
 
     <div class="field">
@@ -35,7 +35,7 @@
     </div>
 
     <div class="field">
-      <%= f.label :password %>
+      <span class="required"><%= f.label :password %></span>
       <% if @minimum_password_length %>
           <em>(<%= @minimum_password_length %> characters minimum)</em>
       <% end %><br />
@@ -43,13 +43,30 @@
     </div>
 
     <div class="field">
-      <%= f.label :password_confirmation %><br />
+      <span class="required"><%= f.label :password_confirmation %></span><br />
       <%= f.password_field :password_confirmation, autocomplete: "off" , class: 'form-control'%>
     </div>
 
     <div class="actions">
-      <%= f.submit "Sign up" %>
+      <%= f.submit "Sign up", :id=>"submit" %>
     </div>
 <% end %>
 
 <%= render "devise/shared/links" %>
+<script>
+    $(document).ready(function() {
+        $('#submit').prop('disabled', true);
+        $('input').change(function(e){
+            if ($('#user_email').val() && $('#user_first_name') && $('#user_last_name') && validateEmail($('#user_phone_number').val()) && $('#user_password').val() && $('#user_password_confirmation').val()){
+               $('#submit').prop('disabled', false);
+            }
+            else{
+                $('#submit').prop('disabled', true);
+            }
+        });
+    });
+    var validateEmail = function(email){
+        var re = /^\d{10}$/;
+        return re.test(email);
+    };
+</script>
