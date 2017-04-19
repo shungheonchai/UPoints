@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170419195255) do
+ActiveRecord::Schema.define(version: 20170419201647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,17 +28,9 @@ ActiveRecord::Schema.define(version: 20170419195255) do
     t.text     "report"
   end
 
-  create_table "reports", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "reporting_user_id"
-    t.text     "reason"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-  end
-
   create_table "requests", force: :cascade do |t|
-    t.integer  "poster_rating"
-    t.integer  "acceptor_rating"
+    t.boolean  "poster_rating",    default: false
+    t.boolean  "acceptor_rating",  default: false
     t.string   "poster_name"
     t.string   "acceptor_name"
     t.text     "food_description"
@@ -47,8 +39,8 @@ ActiveRecord::Schema.define(version: 20170419195255) do
     t.string   "location"
     t.string   "exchange_method"
     t.text     "special_request"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.integer  "user_id"
     t.integer  "user_other_id"
     t.datetime "end_time"
