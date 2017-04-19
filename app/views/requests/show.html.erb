@@ -113,28 +113,10 @@
   </p>
 </table>
 
-<%if current_user.id == @request.user_id && @request.end_time > Time.now && @request.user_other_id == nil %>
+<%if current_user.id == @request.user_id %>
     <%= link_to 'Edit', edit_request_path(@request) %> |
     <%= link_to 'Back', requests_path %>
-<% elsif current_user.id == @request_user_id && @request.user_other_id != nil && @request.start_time > Time.now %>
-    <%= link_to 'Reject Acceptor', requests_path %> |
-    <%= link_to 'Edit', edit_request_path(@request) %> |
-    <%= link_to 'Delete', request, method: :delete, data: { confirm: 'Are you sure you want to delete this request?' } %> |
-    <%= link_to 'Back', requests_path %>
-<% elsif current_user.id == @request.user_id && @request.end_time > Time.now && @request.user_other_id != nil %>
-    <%= link_to 'Rate', requests_path %> |
-    <%= link_to 'Back', requests_path %>
-<%elsif current_user.id == @request.user_other_id && @request.start_time < Time.now%>
-    <%= link_to 'Cancel', requests_path %> |
-    <%= link_to 'Back', requests_path %>
-<%elsif current_user.id == @request.user_other_id && @request.end_time > Time.now %>
-    <%= link_to 'Rate', requests_path %> |
-    <%= link_to 'Cancel', requests_path %> |
-    <%= link_to 'Back', requests_path %>
-<%elsif current_user.id == @request.user_other_id %>
-    <%= link_to 'Rate', requests_path %> |
-    <%= link_to 'Back', requests_path %>
-<%elsif current_user.id != @request.user_other_id && current_user.id != @request.user_id %>
+<%elsif current_user.id != @request.user_other_id %>
     <%= link_to 'Accept', accept_request_path(id: @request.id), method: :post %> |
     <%= link_to 'Back', requests_path %>
 <%else %>
