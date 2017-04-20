@@ -57,7 +57,7 @@
     <% @requests.each do |request| %>
         <% if (request.user_other_id == nil && request.end_time > Time.now) %>
         <tr class="highlight">
-          <td onclick="location.href='<%= url_for(request) %>';"><%= @users.accum_poster_rating %><div onmousemove="movePopup(event)" class="popup">Click to expand</div></td>
+          <td onclick="location.href='<%= url_for(request) %>';"><%= users.accum_poster_rating %><div onmousemove="movePopup(event)" class="popup">Click to expand</div></td>
           <td onclick="location.href='<%= url_for(request) %>';" style="max-width:200px;text-overflow:ellipsis"><%= request.food_description %></td>
           <td onclick="location.href='<%= url_for(request) %>';">$<%= number_with_precision(request.price, :precision => 2) %></td>
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time.strftime("%B %d, %Y") %></td>
