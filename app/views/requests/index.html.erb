@@ -143,17 +143,10 @@
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time.strftime('%I:%M:%S %p') %></td>
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.end_time.strftime('%I:%M:%S %p') %></td>
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.location %></td>
-<<<<<<< HEAD
           <% if request.start_time > Time.now %>
               <td><%= link_to 'Cancel', cancel_request_path(id: request.id), method: :post, data: { confirm: 'Are you sure you want to cancel?'} %></td>
           <% else %>
               <td><%= link_to 'Rate', new_rating_path(id: request.id, user_id: request.user_id)%></td>
-=======
-          <% if request.start_time > Time.now%>
-              <td colspan="2"><%= link_to 'Cancel', accept_request_path(id: request.id), method: :post %></td>
-          <% elsif Time.now > request.start_time %>
-              <td colspan="2"><%= link_to 'Rate', new_rating_path(id: request.id, user_id: request.user_id)%></td>
->>>>>>> 7909c7c652bbc81438c1f0ca14117d433ea135c4
           <% end %>
         </tr>
     <% end %>
