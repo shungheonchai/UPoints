@@ -25,9 +25,16 @@ class RatingsController < ApplicationController
   # POST /ratings.json
   def create
     @rating = Rating.new(rating_params)
-    @rating.user_id = @requests.user_id
+    @rating.user_id = current_user.id
     respond_to do |format|
       if @rating.save
+        #check for poster or acceptor
+        if current_user.id == @rating.request.user_id
+          @rating.request.update_attributes(poster_rating: true)
+        else
+          @rating.request.update_attributes(acceptor_rating: true)
+        end
+
         format.html { redirect_to @rating, notice: 'Rating was successfully created.' }
         format.json { render :show, status: :created, location: @rating }
       else
@@ -69,6 +76,6 @@ class RatingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def rating_params
-      params.require(:rating).permit(:user_id, :location, :communication, :payment, :overall)
+      params.require(:rating).permit(:user_id, :location, :communication, :payment, :overall, :request_id, :report, :rating_user_id)
     end
 end

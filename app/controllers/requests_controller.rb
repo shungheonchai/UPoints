@@ -14,7 +14,7 @@ class RequestsController < ApplicationController
   # GET /requests/1.json
   def show
     if @request.user_other_id.present?
-      @other_user = User.find(id:@request.user_other_id)
+      @other_user = User.find(@request.user_other_id)
     else
       @other_user = nil
     end
@@ -34,7 +34,7 @@ class RequestsController < ApplicationController
   def create
     @request = Request.new(request_params)
     @request.user_id = current_user.id if current_user
-    @request.buyer = current_user.first_name+' '+ current_user.last_name
+    @request.poster_name = current_user.first_name+' '+ current_user.last_name
     if (@request.start_time).past?
       respond_to do |format|
         format.html { redirect_to requests_url, notice: 'You cannot have the request time to happen in the past' }
@@ -113,6 +113,7 @@ class RequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def request_params
-      params.require(:request).permit(:buyer_rating, :seller_rating, :buyer, :seller, :food_description, :price, :end_time, :location, :exchange_method, :special_request, :start_time)
+      params.require(:request).permit(:poster_rating, :acceptor_rating, :poster_name, :acceptor_name, :food_description,
+                                      :price, :end_time, :location, :exchange_method, :special_request, :start_time, :user_id, :user_other_id)
     end
 end
