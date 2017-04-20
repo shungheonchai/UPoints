@@ -1,5 +1,5 @@
 class RequestsController < ApplicationController
-  before_action :set_request, only: [:show, :edit, :update, :destroy, :accept_request]
+  before_action :set_request, only: [:show, :edit, :update, :destroy, :accept_request, :cancel_request]
 
 
   # GET /requests
@@ -81,6 +81,24 @@ class RequestsController < ApplicationController
     respond_to do |format|
       if current_id != @request.user_id && @request.update(user_other_id: current_id)
         format.html { redirect_to requests_path, notice: 'You accepted the request' }
+        format.json { render :show, status: :ok, location: @request }
+      else
+        if current_id == @request.user_id
+          format.html { redirect_to requests_path, notice: 'Cannot accept the request: You can\'t accept your own' }
+          format.json { render json: @request.errors, status: :unprocessable_entity }
+        else
+          format.html { redirect_to requests_path, notice: 'Cannot accept the request: update error. Ask system admin' }
+          format.json { render json: @request.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+  end
+
+  def cancel_request
+    current_id = current_user.id
+    respond_to do |format|
+      if current_id != @request.user_id && @request.update(user_other_id: nil)
+        format.html { redirect_to requests_path, notice: 'You canceled the request' }
         format.json { render :show, status: :ok, location: @request }
       else
         if current_id == @request.user_id
