@@ -55,9 +55,9 @@
 
     <tbody>
     <% @requests.each do |request| %>
-        <% if (request.user_other_id == nil) %>
+        <% if (request.user_other_id == nil && request.end_time > Time.now) %>
         <tr class="highlight">
-          <td onclick="location.href='<%= url_for(request) %>';"><%= request.poster_rating %><div onmousemove="movePopup(event)" class="popup">Click to expand</div></td>
+          <td onclick="location.href='<%= url_for(request) %>';"><%= @users.accum_poster_rating %><div onmousemove="movePopup(event)" class="popup">Click to expand</div></td>
           <td onclick="location.href='<%= url_for(request) %>';" style="max-width:200px;text-overflow:ellipsis"><%= request.food_description %></td>
           <td onclick="location.href='<%= url_for(request) %>';">$<%= number_with_precision(request.price, :precision => 2) %></td>
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time.strftime("%B %d, %Y") %></td>
@@ -83,7 +83,7 @@
         <th>Start Time</th>
         <th>End Time</th>
         <th>Location</th>
-        <th colspan="2" style="text-align:center">View</th>
+        <th colspan="3" style="text-align:center">View</th>
       </tr>
       </thead>
 
@@ -97,9 +97,18 @@
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time.strftime('%I:%M:%S %p') %></td>
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.end_time.strftime('%I:%M:%S %p') %></td>
             <td onclick="location.href='<%= url_for(request) %>';"><%= request.location %></td>
-            <% if request.user_id == current_user.id %>
-                <td><%= link_to 'Edit', edit_request_path(request) %></td>
+            <% if request.user_other_id == nil && request.end_time > Time.now || request.start_time > Time.now && request.user_other_id != nil %>
+                <td colspan="2"><%= link_to 'Edit', edit_request_path(request) %></td>
                 <td><%= link_to 'Delete', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% elsif request.user_other_id != nil && Time.now < request.start_time - 1800 %>
+                <td><%= link_to 'Edit', edit_request_path(request) %></td>
+                <td><%= link_to 'Cancel', request %></td>
+                <td><%= link_to 'Delete', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% elsif request.user_other_id != nil && Time.now < request.start_time - 300 %>
+                <td colspan="2"><%= link_to 'Edit', edit_request_path(request) %></td>
+                <td><%= link_to 'Delete', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <%elsif request.user_other_id != nil && Time.now > request.start_time && request.acceptor_rating == 0 %>
+                <td colspan="3"><%= link_to 'Rate', new_rating_path(id: request.id, user_id: request.user_id)%></td>
             <% end %>
           </tr>
       <% end %>
@@ -134,10 +143,17 @@
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time.strftime('%I:%M:%S %p') %></td>
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.end_time.strftime('%I:%M:%S %p') %></td>
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.location %></td>
+<<<<<<< HEAD
           <% if request.start_time > Time.now %>
               <td><%= link_to 'Cancel', cancel_request_path(id: request.id), method: :post, data: { confirm: 'Are you sure you want to cancel?'} %></td>
           <% else %>
               <td><%= link_to 'Rate', new_rating_path(id: request.id, user_id: request.user_id)%></td>
+=======
+          <% if request.start_time > Time.now%>
+              <td colspan="2"><%= link_to 'Cancel', accept_request_path(id: request.id), method: :post %></td>
+          <% elsif Time.now > request.start_time %>
+              <td colspan="2"><%= link_to 'Rate', new_rating_path(id: request.id, user_id: request.user_id)%></td>
+>>>>>>> 7909c7c652bbc81438c1f0ca14117d433ea135c4
           <% end %>
         </tr>
     <% end %>
