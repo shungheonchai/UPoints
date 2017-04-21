@@ -134,7 +134,7 @@
         <% elsif Time.now < @request.start_time && Time.now > @request.start_time - 300 %>
             <%= link_to 'Back', requests_path %>
         <% elsif Time.now > @request.start_time && @request.acceptor_rating == nil %>
-            <%= link_to 'Rate', requests_path %>
+            <%= link_to 'Rate', new_rating_path(id: request.id, user_id: request.user_id)%>
             <%= link_to 'Back', requests_path %>
         <% else %>
             <%= link_to 'Back', requests_path %>
@@ -147,7 +147,7 @@
     <%elsif Time.now < @request.start_time %>
         <%= link_to 'Back', requests_path %>
     <%elsif Time.now > @request.start_time && @request.poster_rating == nil %>
-        <%= link_to 'Rate', requests_path %>
+        <%= link_to 'Rate', new_rating_path(id: request.id, user_id: request.user_id)%>
         <%= link_to 'Back', requests_path %>
     <% else %>
         <%= link_to 'Back', requests_path %>

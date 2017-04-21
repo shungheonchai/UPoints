@@ -135,7 +135,7 @@
     <tbody>
     <% @user_accepted_requests.each do |request| %>
         <tr class="highlight">
-          <td onclick="location.href='<%= url_for(request) %>';"><%= User.find(request.other_user_id).accum_acceptor_rating %><div class="popup">Click to expand</div></td>
+          <td onclick="location.href='<%= url_for(request) %>';"><%= User.find(request.user_other_id).accum_acceptor_rating %><div class="popup">Click to expand</div></td>
           <td onclick="location.href='<%= url_for(request) %>';" style="width:50px;text-overflow:ellipsis"><%= request.food_description %></td>
           <td onclick="location.href='<%= url_for(request) %>';">$<%= number_with_precision(request.price, :precision => 2) %></td>
            <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time.strftime("%B %d, %Y") %></td>
