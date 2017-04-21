@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   end
 
   match 'accept_request', to: 'requests#accept_request', via: :post
+  match 'cancel_request', to: 'requests#cancel_request', via: :post
 end

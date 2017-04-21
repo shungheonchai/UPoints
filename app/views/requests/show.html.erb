@@ -107,6 +107,9 @@
 <%elsif current_user.id != @request.user_other_id %>
     <%= link_to 'Accept', accept_request_path(id: @request.id), method: :post %> |
     <%= link_to 'Back', requests_path %>
+<%elsif current_user.id == @request.user_other_id && Time.now < @request.start_time-300 %>
+    <%= link_to 'Cancel', cancel_request_path(id: @request.id), method: :post, data: { confirm: 'Are you sure you want to cancel?'} %>
+    <%= link_to 'Back', requests_path %>
 <%else %>
     <%= link_to 'Back', requests_path %>
 <%end%>
