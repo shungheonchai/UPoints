@@ -28,35 +28,39 @@
   <div class="field">
     <tr>
     <td><%= f.label :user_id %></td>
-    <td><%= f.text_field :user_id%> </td>
+    <td><%= f.text_field :user_id, disabled: true, :value => 2%> </td>
     </tr>
   </div>
 
   <div class="field">
     <tr>
-    <td><%= f.label :location %></td>
-    <td><%= f.number_field :location, :step => 1, :min =>1, :max=>5 %></td>
+    <td class="required"><%= f.label :location %></td>
+    <td><%= f.collection_radio_buttons :location, [[1] ,[2], [3], [4], [5]],
+                                       :first, :last, { item_wrapper_tag: false } %></td>
     </tr>
   </div>
 
   <div class="field">
     <tr>
-    <td><%= f.label :communication %></td>
-    <td><%= f.number_field :communication, :step => 1, :min =>1, :max=>5 %></td>
+    <td class="required"><%= f.label :communication %></td>
+      <td><%= f.collection_radio_buttons :communication, [[1] ,[2], [3], [4], [5]],
+                                         :first, :last, { item_wrapper_tag: false } %></td>
     </tr>
   </div>
 
   <div class="field">
     <tr>
-    <td><%= f.label :payment %></td>
-    <td><%= f.number_field :payment, :step => 1, :min =>1, :max=>5 %></td>
+    <td class="required"><%= f.label :payment %></td>
+      <td><%= f.collection_radio_buttons :payment, [[1] ,[2], [3], [4], [5]],
+                                         :first, :last, { item_wrapper_tag: false } %></td>
     </tr>
   </div>
 
   <div class="field">
     <tr>
-    <td><%= f.label :overall %></td>
-    <td><%= f.number_field :overall, :step => 1, :min =>1, :max=>5 %></td>
+    <td class="required"><%= f.label :overall %></td>
+      <td><%= f.collection_radio_buttons :overall, [[1] ,[2], [3], [4], [5]],
+                                         :first, :last, { item_wrapper_tag: false } %></td>
     </tr>
   </div>
 </table>

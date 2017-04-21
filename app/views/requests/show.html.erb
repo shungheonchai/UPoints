@@ -17,24 +17,39 @@
 
   <%if current_user.id == @request.user_id %>
       <h1>Showing Your Request</h1>
-      <p>
-        <tr>
-          <td><strong>Rating:</strong></td>
-          <td><%= @request.acceptor_rating %></td>
-        </tr>
-      </p>
-      <p>
-        <tr>
-          <td><strong>User:</strong></td>
-          <td><%= @request.acceptor_name %></td>
-        </tr>
-      </p>
+      <%if @request.user_other_id != nil %>
+          <p>
+            <tr>
+              <td><strong>Rating:</strong></td>
+              <td><%= User.find(request.other_user_id).accum_acceptor_rating %></td>
+            </tr>
+          </p>
+          <p>
+            <tr>
+              <td><strong>User:</strong></td>
+              <td><%= @request.acceptor_name %></td>
+            </tr>
+          </p>
+      <%else%>
+          <p>
+            <tr>
+              <td><strong>Rating:</strong></td>
+              <td>Has not been accepted yet</td>
+            </tr>
+          </p>
+          <p>
+            <tr>
+              <td><strong>User:</strong></td>
+              <td>Has not been accepted yet</td>
+            </tr>
+          </p>
+      <%end%>
   <%else%>
       <h1>Showing <%= @request.poster_name %>'s Request</h1>
       <p>
         <tr>
           <td><strong>Rating:</strong></td>
-          <td><%= @request.poster_rating %></td>
+          <td><%= User.find(@request.user_id).accum_poster_rating %></td>
         </tr>
       </p>
       <p>
@@ -59,25 +74,25 @@
     </tr>
   </p>
 
-<p>
- <tr>
-  <td><strong>Date:</strong></td>
-  <td><%= @request.start_time.strftime("%B %d, %Y") %></td>
-  </tr>
-</p>
+  <p>
+    <tr>
+      <td><strong>Date:</strong></td>
+      <td><%= @request.start_time.strftime("%B %d, %Y") %></td>
+    </tr>
+  </p>
 
-<p>
-  <tr>
-  <td><strong>Start Time:</strong></td>
-  <td><%= @request.start_time.strftime('%I:%M:%S %p') %></td>
-  </tr>
-</p>
-<p>
-  <tr>
-  <td><strong>End Time:</strong></td>
-  <td><%= @request.end_time.strftime('%I:%M:%S %p') %></td>
-  </tr>
-</p>
+  <p>
+    <tr>
+      <td><strong>Start Time:</strong></td>
+      <td><%= @request.start_time.strftime('%I:%M:%S %p') %></td>
+    </tr>
+  </p>
+  <p>
+    <tr>
+      <td><strong>End Time:</strong></td>
+      <td><%= @request.end_time.strftime('%I:%M:%S %p') %></td>
+    </tr>
+  </p>
 
   <p>
     <tr>
@@ -102,11 +117,49 @@
 </table>
 
 <%if current_user.id == @request.user_id %>
-    <%= link_to 'Edit', edit_request_path(@request) %> |
-    <%= link_to 'Back', requests_path %>
-<%elsif current_user.id != @request.user_other_id %>
-    <%= link_to 'Accept', accept_request_path(id: @request.id), method: :post %> |
-    <%= link_to 'Back', requests_path %>
-<%else %>
-    <%= link_to 'Back', requests_path %>
+    <%if @request.user_other_id == nil %>
+        <%if @request.end_time - 300 > Time.now %>
+            <%= link_to 'Edit', edit_request_path(@request) %> |
+            <%= link_to 'Delete', request_path, method: :delete, data: { confirm: 'Are you sure?' } %> |
+            <%= link_to 'Back', requests_path %>
+        <%else%>
+            <%= link_to 'Back', requests_path %>
+        <%end%>
+    <%else%>
+        <%if @request.start_time - 300 > Time.now %>
+            <%= link_to 'Edit', edit_request_path(@request) %> |
+            <%= link_to 'Cancel', cancel_request_path(id: @request.id), method: :post, data: { confirm: 'Are you sure you want to cancel?'} %> |
+            <%= link_to 'Delete', request_path, method: :delete, data: { confirm: 'Are you sure?' } %> |
+            <%= link_to 'Back', requests_path %>
+        <% elsif Time.now < @request.start_time && Time.now > @request.start_time - 300 %>
+            <%= link_to 'Back', requests_path %>
+        <% elsif Time.now > @request.start_time && @request.acceptor_rating == nil %>
+            <%= link_to 'Rate', new_rating_path(id: request.id, user_id: request.user_id)%>
+            <%= link_to 'Back', requests_path %>
+        <% else %>
+            <%= link_to 'Back', requests_path %>
+        <%end%>
+    <%end%>
+<%elsif current_user.id == @request.user_other_id %>
+    <%if Time.now < @request.start_time - 300 %>
+        <%= link_to 'Cancel', cancel_request_path(id: @request.id), method: :post, data: { confirm: 'Are you sure you want to cancel?'} %>
+        <%= link_to 'Back', requests_path %>
+    <%elsif Time.now < @request.start_time %>
+        <%= link_to 'Back', requests_path %>
+    <%elsif Time.now > @request.start_time && @request.poster_rating == nil %>
+        <%= link_to 'Rate', new_rating_path(id: request.id, user_id: request.user_id)%>
+        <%= link_to 'Back', requests_path %>
+    <% else %>
+        <%= link_to 'Back', requests_path %>
+    <%end%>
+<%else%>
+    <%if Time.now < @request.end_time - 300 && @request.user_other_id == nil %>
+        <%= link_to 'Accept', accept_request_path(id: @request.id), method: :post %> |
+        <%= link_to 'Back', requests_path %>
+    <%else%>
+        <%= link_to 'Back', requests_path %>
+    <%end%>
 <%end%>
+
+
+
