@@ -78,6 +78,8 @@ class RequestsController < ApplicationController
 
   def accept_request
     current_id = current_user.id
+    UserMailer.create_accept_request_acceptor(current_user, @request).deliver
+    UserMailer.create_accept_request_poster(User.find(@request.user_id), @request).deliver
     respond_to do |format|
       if current_id != @request.user_id && @request.update(user_other_id: current_id)
         format.html { redirect_to requests_path, notice: 'You accepted the request' }
@@ -96,6 +98,7 @@ class RequestsController < ApplicationController
 
   def cancel_request
     current_id = current_user.id
+    UserMailer .create_cancel_request_poster(User.find(@request.user_id), @request).deliver
     respond_to do |format|
       if current_id != @request.user_id && @request.update(user_other_id: nil)
         format.html { redirect_to requests_path, notice: 'You canceled the request' }

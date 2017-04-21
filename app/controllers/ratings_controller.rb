@@ -14,7 +14,13 @@ class RatingsController < ApplicationController
 
   # GET /ratings/new
   def new
-    @rating = Rating.new
+
+    @rating = Rating.new(user_id:params[:user_id],request_id:[params[:id]],rating_user_id:current_user.id)
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @rating }
+    end
   end
 
   # GET /ratings/1/edit
@@ -25,7 +31,7 @@ class RatingsController < ApplicationController
   # POST /ratings.json
   def create
     @rating = Rating.new(rating_params)
-    @rating.user_id = current_user.id
+    binding.pry
     respond_to do |format|
       if @rating.save
         current_user.update_accum_rating

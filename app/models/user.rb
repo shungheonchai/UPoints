@@ -25,7 +25,11 @@ class User < ApplicationRecord
     all_ratings.each do |rating|
       total_rating+=rating.overall
     end
-    avg_rating = total_rating/(all_ratings.count)
+    if (all_ratings.count == 0)
+      avg_rating = 0
+    else
+      avg_rating = total_rating/(all_ratings.count)
+    end
 
     self.update_attributes(accum_poster_rating:avg_rating)
     self.update_attributes(accum_acceptor_rating:avg_rating)
