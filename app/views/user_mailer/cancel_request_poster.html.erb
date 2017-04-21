@@ -1,0 +1,14 @@
+<div>
+  <p>Hello from UPoints!</p>
+
+  <p>We are sorry to tell you that <%= @request.acceptor_name %> has cancelled the request for <%= @request.food_description %> that should have happened
+    <%= @request.start_time.strftime("On %a,%m/%d/%Y at %I:%M%p")%>
+  </p>
+
+  <p> Hope that helps!</p>
+
+  <p>Thank you,<br>
+    The UPoints Team</p>
+
+  <p><a href="mailto:hi@exmaple.example">exmaple@example.com</a></p>
+</div>

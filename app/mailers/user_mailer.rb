@@ -14,5 +14,22 @@ class UserMailer < ApplicationMailer
     mail(to: @user.email, subject: "So Sorry to See You Go")
   end
 
+  def cancel_request_poster(user, request)
+    @user = user
+    @request = request
+    mail(to: @user.email, subject: "Someone Cancelled the Request you posted")
+  end
+
+  def accept_request_poster(user, request)
+    @user = user
+    @request = request
+    mail(to: @user.email, subject: "Someone Accepted the Request you posted!")
+  end
+
+  def accept_request_acceptor(user, request)
+    @user = user
+    @request = request
+    mail(to: @user.email, subject: "You successfully accepted a request! Reminder")
+  end
 
 end

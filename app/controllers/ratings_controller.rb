@@ -28,12 +28,15 @@ class RatingsController < ApplicationController
     @rating.user_id = current_user.id
     respond_to do |format|
       if @rating.save
+        current_user.update_accum_rating
+        User.find(@rating.request.user_id).update_accum_rating
         #check for poster or acceptor
         if current_user.id == @rating.request.user_id
           @rating.request.update_attributes(poster_rating: true)
         else
           @rating.request.update_attributes(acceptor_rating: true)
         end
+
 
         format.html { redirect_to @rating, notice: 'Rating was successfully created.' }
         format.json { render :show, status: :created, location: @rating }
@@ -61,7 +64,15 @@ class RatingsController < ApplicationController
   # DELETE /ratings/1
   # DELETE /ratings/1.json
   def destroy
+    #check for poster or acceptor
+    if current_user.id == @rating.request.user_id
+
+    else
+
+    end
     @rating.destroy
+    current_user.update_accum_rating
+    User.find(@rating.request.user_id).update_accum_rating
     respond_to do |format|
       format.html { redirect_to ratings_url, notice: 'Rating was successfully destroyed.' }
       format.json { head :no_content }

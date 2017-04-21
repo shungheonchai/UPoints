@@ -1,0 +1,16 @@
+<div>
+  <p>Hello from UPoints!</p>
+
+  <p>This is a reminder that you've accepted a request from
+    <%= @request.poster_name %>
+  </p>
+
+  <p>It will be held at <%= @request.start_time.strftime("On %a,%m/%d/%Y at %I:%M%p")%> and you will be purchasing <%= @request.food_description %></p>
+
+  <p> Hope that helps!</p>
+
+  <p>Thank you,<br>
+    The UPoints Team</p>
+
+  <p><a href="mailto:hi@exmaple.example">exmaple@example.com</a></p>
+</div>
