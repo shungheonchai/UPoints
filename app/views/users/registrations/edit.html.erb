@@ -67,3 +67,20 @@
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
 <%= link_to "Back", :back %>
+<script>
+    $(document).ready(function() {
+        $('#submit').prop('disabled', true);
+        $('input').change(function(e){
+            if (validateEmail($('#user_phone_number').val()) || $('#user_phone_number').val() == null){
+                $('#submit').prop('disabled', false);
+            }
+            else{
+                $('#submit').prop('disabled', true);
+            }
+        });
+    });
+    var validateEmail = function(phone){
+        var re = /^\d{10}$/;
+        return re.test(email);
+    };
+</script>

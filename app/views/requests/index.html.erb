@@ -55,7 +55,7 @@
 
     <tbody>
     <% @requests.each do |request| %>
-        <% if (request.user_other_id == nil && request.end_time - 300 > Time.now) %>
+        <% if (request.user_id != current_user.id && request.user_other_id == nil && request.end_time - 300 > Time.now) %>
         <tr class="highlight">
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.user.accum_poster_rating %><div onmousemove="movePopup(event)" class="popup">Click to expand</div></td>
           <td onclick="location.href='<%= url_for(request) %>';" style="max-width:200px;text-overflow:ellipsis"><%= request.food_description %></td>
