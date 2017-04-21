@@ -109,6 +109,8 @@
                 <td><%= link_to 'Delete', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
             <%elsif request.user_other_id != nil && Time.now > request.start_time && request.acceptor_rating == 0 %>
                 <td colspan="3"><%= link_to 'Rate', new_rating_path(id: request.id, user_id: request.user_id)%></td>
+            <%else%>
+                <td colspan="3" onclick="location.href='<%= url_for(request) %>';"></td>
             <% end %>
           </tr>
       <% end %>
