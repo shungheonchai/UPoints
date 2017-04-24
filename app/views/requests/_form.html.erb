@@ -44,14 +44,14 @@
 
   <div class="field">
     <tr>
-    <td class="required"><%= f.label :start_time %></td>
+    <td class="required"><%= f.label :start_time %> (Must be after current time)</td>
     <td><%= f.datetime_select :start_time, :ampm =>true %></td>
     </tr>
   </div>
 
     <div class="field">
       <tr>
-      <td class="required"><%= f.label :end_time %></td>
+      <td class="required"><%= f.label :end_time %> (Must be at least 5 minutes after start time)</td>
       <td><%= f.datetime_select :end_time, :ampm =>true%></td>
       </tr>
     </div>
@@ -79,6 +79,25 @@
 </table>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :id=>"submit"  %> <span name="fill">Fill all required fields</span>
   </div>
 <% end %>
+<script>
+    $(document).ready(function() {
+        $('#submit').prop('disabled', true);
+        $('input').change(function(e){
+            if ($('#request_price').val() && $('#request_food_description').val()){
+                $('#submit').prop('disabled', false);
+                document.getElementByID('fill').style.visibility = 'hidden';
+            }
+            else{
+                $('#submit').prop('disabled', true);
+                document.getElementByID('fill').style.visibility = 'visible';
+            }
+        });
+    });
+    var validateTime = function(time){
+        var re = /^\d{10}$/;
+        return re.test(time);
+    };
+</script>
