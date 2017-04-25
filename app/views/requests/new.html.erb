@@ -1,6 +1,7 @@
-<br>
-<h1>New Request</h1>
+<div class="transparent-background">
+  <br>
+  <h1>New Request</h1>
+  <%= render 'form', request: @request %>
 
-<%= render 'form', request: @request %>
-
-<%= link_to 'Back', requests_path %>
+  <%= link_to 'Back', requests_path %>
+</div>

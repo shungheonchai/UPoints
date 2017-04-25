@@ -4,17 +4,106 @@
 
 
 
-        <div style="position: relative; text-align:center">
-          <span style = "position: absolute; left: 0px;"><h2>Exchange with UPoints</h2></span><br><br>
-          <span style = "position: absolute; left: 5px"><h2 style="font-weight: 100">Eat Cheap</h2></span>
-          <span style ="position: absolute; right: 5px">
-            <h2><%= link_to 'List of Requests', requests_path%></h2>
-          </span>
-          <br><br><br>
-          <img src = "/assets/food.jpg" alt="Food" align=middle width = 100%"><br><br>
-          <%#= link_to 'Contact Us', static_pages_contact_path%>&nbsp&nbsp<%#= link_to  'Liability', static_pages_liability_path%>
-        </div>
+          <div style="position: relative; text-align:center">
+              <span style = "position: absolute; left: 10px;"><h1>Welcome to UPoints</h1></span>
+
+            <span style ="position: absolute; right: 5px">
+              <h2><%= link_to 'List of Requests', requests_path%></h2>
+            </span>
+            <br><br><br>
+            <!--<img src = "/assets/food.jpg" alt="Food" align=middle width = 100%"><br><br>-->
+            <%#= link_to 'Contact Us', static_pages_contact_path%>&nbsp&nbsp<%#= link_to  'Liability', static_pages_liability_path%>
+          </div>
 
       </div>
     </div>
+
+    <style>
+      table, th {
+        border-bottom: 2px solid;
+        padding: 10px;
+        overflow: hidden;
+        white-space: nowrap;
+        table-layout: fixed;
+        text-overflow: ellipsis;
+        width: 100%;
+      }
+      td {
+        border-bottom: 1px solid;
+        padding: 10px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+      .button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 16px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-left: 4px ;
+        cursor: pointer;
+      }
+    </style>
+
+    <div class="tab">
+      <button class="tablinks" id="defaultOpen">All Requests</button>
+
+    </div>
+
+    <div id="Requests" class="tabcontent">
+      <table>
+        <thead>
+        <tr>
+          <th>Rating</th>
+          <th>Food Description</th>
+          <th>Price</th>
+          <th>Date</th>
+          <th>Start Time</th>
+          <th>End Time</th>
+          <th>Location</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @requests.each do |request| %>
+            <tr class="highlight">
+                <td><%= request.user.accum_poster_rating %></td>
+                <td style="max-width:200px;text-overflow:ellipsis"><%= request.food_description %></td>
+                <td>$<%= number_with_precision(request.price, :precision => 2) %></td>
+                <td><%= request.start_time.strftime("%B %d, %Y") %></td>
+                <td><%= request.start_time.strftime('%I:%M %p') %></td>
+                <td><%= request.end_time.strftime('%I:%M %p') %></td>
+                <td><%= request.location %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <br>
+    </div>
+
+
+    <script>
+        //        var mouseX;
+        //        var mouseY;
+        //        $(document).mousemove( function(e) {
+        //          mouseX = e.pageX;
+        //          mouseY = e.pageY;
+        //        });
+        $(document).ready(function(){
+            $('.highlight').hover(function() {
+//                $(this).find('.popup').css({'left':mouseX, 'top':mouseY});
+                $(this).find('.popup').show();
+            }, function() {
+                $(this).find('.popup').hide();
+            })
+        });
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+    </script>
+
 <% end %>

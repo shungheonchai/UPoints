@@ -26,6 +26,28 @@
   @extend .alert-info;
 }
 
+.transparent-background:before {
+  background: url(restaurant.jpg) repeat scroll 0 0 transparent;
+  opacity: 0.15;
+  bottom: 0;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+
+}
+.transparent-background {
+  width:100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  z-index: 5;
+
+}
+
  .solidfill {
    background-color: rgba(76, 185, 188, 1);
    border-color: #4CB9BC;

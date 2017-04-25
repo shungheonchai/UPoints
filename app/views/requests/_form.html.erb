@@ -44,15 +44,15 @@
 
   <div class="field">
     <tr>
-    <td class="required"><%= f.label :start_time, "Deliver After" %> (Must be after current time)</td>
-    <td><%= f.datetime_select :start_time, min: Time.now, :ampm =>true %></td>
+    <td class="required"><%= f.label :start_time %> (Must be after current time)</td>
+    <td><%= f.datetime_select :start_time, :ampm =>true, default: DateTime.now , min: Time.now%></td>
     </tr>
   </div>
 
     <div class="field">
       <tr>
-      <td class="required"><%= f.label :end_time, "Deliver By" %> (Must be at least 5 minutes after start time)</td>
-      <td><%= f.datetime_select :end_time, max: Time.now + 14400, :ampm =>true%></td>
+      <td class="required"><%= f.label :end_time %> (Must be at least 5 minutes after start time)</td>
+      <td><%= f.datetime_select :end_time, :ampm =>true, default: (DateTime.now+10.minute), max: Time.now + 14400%></td>
       </tr>
     </div>
 
