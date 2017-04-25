@@ -21,7 +21,7 @@
     text-overflow: ellipsis;
   }
   .button {
-    background-color: #4CAF50;
+    background-color: #4CB9BC;
     border: none;
     color: white;
     padding: 16px 20px;
@@ -36,8 +36,8 @@
 <a class="button" href="/requests/new" style="text-decoration:none; color:white; float:right">New Request</a>
 <div class="tab">
   <button class="tablinks" onclick="openTab(event, 'Requests')" id="defaultOpen">All Requests</button>
-  <button class="tablinks" onclick="openTab(event, 'Posts')">Your Requests</button>
-  <button class="tablinks" onclick="openTab(event, 'Accepted')">Accepted Requests</button>
+  <button class="tablinks" onclick="openTab(event, 'Posts')">My Requests</button>
+  <button class="tablinks" onclick="openTab(event, 'Accepted')">Requests I've Accepted</button>
 </div>
 
 <div id="Requests" class="tabcontent">
@@ -59,8 +59,8 @@
         <% if (request.user_id == current_user.id || request.user_other_id == nil) && request.end_time - 300 > Time.now %>
             <% if request.user_id == current_user.id %>
                 <tr class="highlight" bgcolor="#737CA1">
-            <% else%>
-                <tr class="highlight">
+            <%else%>
+                <tr class="everyother">
             <%end%>
             <td onclick="location.href='<%= url_for(request) %>';"><%= request.user.accum_poster_rating %><div onmousemove="movePopup(event)" class="popup">Click to expand</div></td>
             <td onclick="location.href='<%= url_for(request) %>';" style="max-width:200px;text-overflow:ellipsis"><%= request.food_description %></td>
@@ -94,11 +94,15 @@
 
     <tbody>
     <% @user_posted_requests.each do |request| %>
-        <tr class="highlight">
+        <tr class="everyother">
           <td onclick="location.href='<%= url_for(request) %>';">
-            <% if request.user_other_id==nil%>
+            <% if request.user_other_id==nil && Time.now > request.end_time %>
+                Expired
+            <% elsif request.user_other_id!=nil && Time.now > request.end_time %>
+                Completed
+            <% elsif request.user_other_id==nil && Time.now < request.end_time %>
                 Not Accepted
-            <% else %>
+            <% elsif request.user_other_id!=nil && Time.now < request.end_time %>
                 Accepted
             <% end %>
             <div class="popup">Click to expand</div>
@@ -109,7 +113,7 @@
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time.strftime('%I:%M %p') %></td>
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.end_time.strftime('%I:%M %p') %></td>
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.location %></td>
-          <% if request.user_other_id == nil && request.end_time > Time.now || request.start_time > Time.now && request.user_other_id != nil %>
+          <% if request.user_other_id == nil && request.end_time > Time.now || request.start_time > Time.now-300 && request.user_other_id != nil %>
               <td><%= link_to 'Edit', edit_request_path(request) %></td>
               <td colspan="2"><%= link_to 'Delete', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <% elsif request.user_other_id != nil && Time.now < request.start_time - 300 %>
@@ -146,7 +150,7 @@
 
     <tbody>
     <% @user_accepted_requests.each do |request| %>
-        <tr class="highlight">
+        <tr class="everyother">
           <td onclick="location.href='<%= url_for(request) %>';"><%= User.find(request.user_other_id).accum_acceptor_rating %><div class="popup">Click to expand</div></td>
           <td onclick="location.href='<%= url_for(request) %>';" style="width:50px;text-overflow:ellipsis"><%= request.food_description %></td>
           <td onclick="location.href='<%= url_for(request) %>';">$<%= number_with_precision(request.price, :precision => 2) %></td>
@@ -156,7 +160,7 @@
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.location %></td>
           <% if request.start_time > Time.now %>
               <td><%= link_to 'Cancel', cancel_request_path(id: request.id), method: :post, data: { confirm: 'Are you sure you want to cancel?'} %></td>
-          <% else %>
+          <% elsif request.acceptor_rating == false %>
               <td><%= link_to 'Rate', new_rating_path(id: request.id, user_id: request.user_id)%></td>
           <% end %>
         </tr>

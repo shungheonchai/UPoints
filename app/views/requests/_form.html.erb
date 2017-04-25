@@ -45,28 +45,21 @@
   <div class="field">
     <tr>
     <td class="required"><%= f.label :start_time %> (Must be after current time)</td>
-    <td><%= f.datetime_select :start_time, :ampm =>true, default: DateTime.now %></td>
+    <td><%= f.datetime_select :start_time, :ampm =>true, default: DateTime.now , min: Time.now%></td>
     </tr>
   </div>
 
     <div class="field">
       <tr>
       <td class="required"><%= f.label :end_time %> (Must be at least 5 minutes after start time)</td>
-      <td><%= f.datetime_select :end_time, :ampm =>true, default: (DateTime.now+10.minute)%></td>
+      <td><%= f.datetime_select :end_time, :ampm =>true, default: (DateTime.now+10.minute), max: Time.now + 14400%></td>
       </tr>
     </div>
 
   <div class="field">
     <tr>
-    <td class="required"><%= f.label :location %></td>
-    <td><%= f.text_field :location, :required => true %></td>
-    </tr>
-  </div>
-
-  <div class="field">
-    <tr>
-    <td class="required"><%= f.label :exchange_method %></td>
-    <td><%= f.select :exchange_method, [['Swipe','Swipe'],['Delivery','Delivery']] %></td>
+    <td class="required"><%= f.label :location, "Dropoff Location" %></td>
+    <td><%= f.select :location,[['BD','BD'], ['Law Cafe','Law Cafe'],['Village','Village'],['Holmes Lounge','Holmes Lounge'],['Stanley\'s', 'Stanley\'s'], ['DUC','DUC'], ['Subway','Subway']], :required => true %></td>
     </tr>
   </div>
 
@@ -86,7 +79,57 @@
     $(document).ready(function() {
         $('#submit').prop('disabled', true);
         $('input').change(function(e){
-            if ($('#request_price').val() && $('#request_food_description').val()){
+            if ($('#request_price').val() && $('#request_food_description').val() && validateTime(putTogether($('#request_start_time_1i').val(),$('#request_start_time_2i').val(), $('#request_start_time_3i').val(), $('#request_start_time_4i').val(), $('#request_start_time_5i').val()))){
+                $('#submit').prop('disabled', false);
+                document.getElementByID('fill').style.visibility = 'hidden';
+            }
+            else{
+                $('#submit').prop('disabled', true);
+                document.getElementByID('fill').style.visibility = 'visible';
+            }
+        });
+        $('#request_start_time_1i').on('change', function(){
+            if ($('#request_price').val() && $('#request_food_description').val() && validateTime(putTogether($('#request_start_time_1i').val(),$('#request_start_time_2i').val(), $('#request_start_time_3i').val(), $('#request_start_time_4i').val(), $('#request_start_time_5i').val()))){
+                $('#submit').prop('disabled', false);
+                document.getElementByID('fill').style.visibility = 'hidden';
+            }
+            else{
+                $('#submit').prop('disabled', true);
+                document.getElementByID('fill').style.visibility = 'visible';
+            }
+        });
+        $('#request_start_time_2i').on('change', function(){
+            if ($('#request_price').val() && $('#request_food_description').val() && validateTime(putTogether($('#request_start_time_1i').val(),$('#request_start_time_2i').val(), $('#request_start_time_3i').val(), $('#request_start_time_4i').val(), $('#request_start_time_5i').val()))){
+                $('#submit').prop('disabled', false);
+                document.getElementByID('fill').style.visibility = 'hidden';
+            }
+            else{
+                $('#submit').prop('disabled', true);
+                document.getElementByID('fill').style.visibility = 'visible';
+            }
+        });
+        $('#request_start_time_3i').on('change', function(){
+            if ($('#request_price').val() && $('#request_food_description').val() && validateTime(putTogether($('#request_start_time_1i').val(),$('#request_start_time_2i').val(), $('#request_start_time_3i').val(), $('#request_start_time_4i').val(), $('#request_start_time_5i').val()))){
+                $('#submit').prop('disabled', false);
+                document.getElementByID('fill').style.visibility = 'hidden';
+            }
+            else{
+                $('#submit').prop('disabled', true);
+                document.getElementByID('fill').style.visibility = 'visible';
+            }
+        });
+        $('#request_start_time_4i').on('change', function(){
+            if ($('#request_price').val() && $('#request_food_description').val() && validateTime(putTogether($('#request_start_time_1i').val(),$('#request_start_time_2i').val(), $('#request_start_time_3i').val(), $('#request_start_time_4i').val(), $('#request_start_time_5i').val()))){
+                $('#submit').prop('disabled', false);
+                document.getElementByID('fill').style.visibility = 'hidden';
+            }
+            else{
+                $('#submit').prop('disabled', true);
+                document.getElementByID('fill').style.visibility = 'visible';
+            }
+        });
+        $('#request_start_time_5i').on('change', function(){
+            if ($('#request_price').val() && $('#request_food_description').val() && validateTime(putTogether($('#request_start_time_1i').val(),$('#request_start_time_2i').val(), $('#request_start_time_3i').val(), $('#request_start_time_4i').val(), $('#request_start_time_5i').val()))){
                 $('#submit').prop('disabled', false);
                 document.getElementByID('fill').style.visibility = 'hidden';
             }
@@ -96,8 +139,13 @@
             }
         });
     });
+
     var validateTime = function(time){
-        var re = /^\d{10}$/;
-        return re.test(time);
+        var now = new Date();
+        return (Date.parse(now)) < (Date.parse(time));
+    };
+    var putTogether = function(year, month, day, hour, minute){
+        var together = new Date(year + " " + month + " " + day + " " + hour + ":" + minute);
+        return together;
     };
 </script>
