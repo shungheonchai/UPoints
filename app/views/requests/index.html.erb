@@ -130,7 +130,7 @@
               <td><%= link_to 'Edit', edit_request_path(request) %></td>
               <td><%= link_to 'Cancel', request %></td>
               <td><%= link_to 'Delete', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          <%elsif request.user_other_id != nil && Time.now > request.start_time && request.acceptor_rating == 0 %>
+          <%elsif request.user_other_id != nil && Time.now > request.start_time && request.poster_rating == 0 %>
               <td colspan="3"><%= link_to 'Rate', new_rating_path(id: request.id, user_id: request.user_id)%></td>
           <%else%>
               <td colspan="3" onclick="location.href='<%= url_for(request) %>';"></td>
@@ -162,10 +162,10 @@
     <% @user_accepted_requests.each do |request| %>
         <tr class="everyother">
           <td onclick="location.href='<%= url_for(request) %>';">
-            <% if User.find(request.user_other_id).accum_acceptor_rating.nil? %>
+            <% if User.find(request.user_other_id).accum_poster_rating.nil? %>
                 No Ratings
             <% else %>
-                <%= User.find(request.user_other_id).accum_acceptor_rating %>
+                <%= User.find(request.user_other_id).accum_poster_rating %>
             <% end %>
             <div class="popup">Click to expand</div></td>
           <td onclick="location.href='<%= url_for(request) %>';" style="width:50px;text-overflow:ellipsis"><%= request.food_description %></td>

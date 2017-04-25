@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<br><br>
 <h1>Ratings</h1>
 
 <table>
@@ -22,9 +22,6 @@
         <td><%= rating.communication %></td>
         <td><%= rating.payment %></td>
         <td><%= rating.overall %></td>
-        <td><%= link_to 'Show', rating %></td>
-        <td><%= link_to 'Edit', edit_rating_path(rating) %></td>
-        <td><%= link_to 'Destroy', rating, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -32,4 +29,4 @@
 
 <br>
 
-<%= link_to 'New Rating', new_rating_path %>
+<%= link_to 'Back', @requests_path %>

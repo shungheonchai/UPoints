@@ -1,3 +1,4 @@
+<br><br>
 <%= form_for(request) do |f| %>
   <% if request.errors.any? %>
     <div id="error_explanation">
@@ -75,77 +76,3 @@
     <%= f.submit :id=>"submit"  %> <span name="fill">Fill all required fields</span>
   </div>
 <% end %>
-<script>
-    $(document).ready(function() {
-        $('#submit').prop('disabled', true);
-        $('input').change(function(e){
-            if ($('#request_price').val() && $('#request_food_description').val() && validateTime(putTogether($('#request_start_time_1i').val(),$('#request_start_time_2i').val(), $('#request_start_time_3i').val(), $('#request_start_time_4i').val(), $('#request_start_time_5i').val()))){
-                $('#submit').prop('disabled', false);
-                document.getElementByID('fill').style.visibility = 'hidden';
-            }
-            else{
-                $('#submit').prop('disabled', true);
-                document.getElementByID('fill').style.visibility = 'visible';
-            }
-        });
-        $('#request_start_time_1i').on('change', function(){
-            if ($('#request_price').val() && $('#request_food_description').val() && validateTime(putTogether($('#request_start_time_1i').val(),$('#request_start_time_2i').val(), $('#request_start_time_3i').val(), $('#request_start_time_4i').val(), $('#request_start_time_5i').val()))){
-                $('#submit').prop('disabled', false);
-                document.getElementByID('fill').style.visibility = 'hidden';
-            }
-            else{
-                $('#submit').prop('disabled', true);
-                document.getElementByID('fill').style.visibility = 'visible';
-            }
-        });
-        $('#request_start_time_2i').on('change', function(){
-            if ($('#request_price').val() && $('#request_food_description').val() && validateTime(putTogether($('#request_start_time_1i').val(),$('#request_start_time_2i').val(), $('#request_start_time_3i').val(), $('#request_start_time_4i').val(), $('#request_start_time_5i').val()))){
-                $('#submit').prop('disabled', false);
-                document.getElementByID('fill').style.visibility = 'hidden';
-            }
-            else{
-                $('#submit').prop('disabled', true);
-                document.getElementByID('fill').style.visibility = 'visible';
-            }
-        });
-        $('#request_start_time_3i').on('change', function(){
-            if ($('#request_price').val() && $('#request_food_description').val() && validateTime(putTogether($('#request_start_time_1i').val(),$('#request_start_time_2i').val(), $('#request_start_time_3i').val(), $('#request_start_time_4i').val(), $('#request_start_time_5i').val()))){
-                $('#submit').prop('disabled', false);
-                document.getElementByID('fill').style.visibility = 'hidden';
-            }
-            else{
-                $('#submit').prop('disabled', true);
-                document.getElementByID('fill').style.visibility = 'visible';
-            }
-        });
-        $('#request_start_time_4i').on('change', function(){
-            if ($('#request_price').val() && $('#request_food_description').val() && validateTime(putTogether($('#request_start_time_1i').val(),$('#request_start_time_2i').val(), $('#request_start_time_3i').val(), $('#request_start_time_4i').val(), $('#request_start_time_5i').val()))){
-                $('#submit').prop('disabled', false);
-                document.getElementByID('fill').style.visibility = 'hidden';
-            }
-            else{
-                $('#submit').prop('disabled', true);
-                document.getElementByID('fill').style.visibility = 'visible';
-            }
-        });
-        $('#request_start_time_5i').on('change', function(){
-            if ($('#request_price').val() && $('#request_food_description').val() && validateTime(putTogether($('#request_start_time_1i').val(),$('#request_start_time_2i').val(), $('#request_start_time_3i').val(), $('#request_start_time_4i').val(), $('#request_start_time_5i').val()))){
-                $('#submit').prop('disabled', false);
-                document.getElementByID('fill').style.visibility = 'hidden';
-            }
-            else{
-                $('#submit').prop('disabled', true);
-                document.getElementByID('fill').style.visibility = 'visible';
-            }
-        });
-    });
-
-    var validateTime = function(time){
-        var now = new Date();
-        return (Date.parse(now)) < (Date.parse(time));
-    };
-    var putTogether = function(year, month, day, hour, minute){
-        var together = new Date(year + " " + month + " " + day + " " + hour + ":" + minute);
-        return together;
-    };
-</script>

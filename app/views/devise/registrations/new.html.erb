@@ -1,3 +1,4 @@
+<br><br>
 <h2>Sign up</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -53,20 +54,3 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
-<script>
-    $(document).ready(function() {
-        $('#submit').prop('disabled', true);
-        $('input').change(function(e){
-            if ($('#user_email').val() && $('#user_first_name') && $('#user_last_name') && validateEmail($('#user_phone_number').val()) && $('#user_password').val() && $('#user_password_confirmation').val()){
-               $('#submit').prop('disabled', false);
-            }
-            else{
-                $('#submit').prop('disabled', true);
-            }
-        });
-    });
-    var validateEmail = function(email){
-        var re = /^\d{10}$/;
-        return re.test(email);
-    };
-</script>
