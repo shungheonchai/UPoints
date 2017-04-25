@@ -62,7 +62,14 @@
             <%else%>
                 <tr class="everyother">
             <%end%>
-            <td onclick="location.href='<%= url_for(request) %>';"><%= request.user.accum_poster_rating %><div onmousemove="movePopup(event)" class="popup">Click to expand</div></td>
+            <td onclick="location.href='<%= url_for(request) %>';">
+              <% if request.user.accum_poster_rating.nil? %>
+                  No Ratings
+              <% else %>
+                  <%= request.user.accum_poster_rating %>
+              <% end %>
+
+              <div onmousemove="movePopup(event)" class="popup">Click to expand</div></td>
             <td onclick="location.href='<%= url_for(request) %>';" style="max-width:200px;text-overflow:ellipsis"><%= request.food_description %></td>
             <td onclick="location.href='<%= url_for(request) %>';">$<%= number_with_precision(request.price, :precision => 2) %></td>
             <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time.strftime("%B %d, %Y") %></td>
@@ -154,7 +161,13 @@
     <tbody>
     <% @user_accepted_requests.each do |request| %>
         <tr class="everyother">
-          <td onclick="location.href='<%= url_for(request) %>';"><%= User.find(request.user_other_id).accum_acceptor_rating %><div class="popup">Click to expand</div></td>
+          <td onclick="location.href='<%= url_for(request) %>';">
+            <% if User.find(request.user_other_id).accum_acceptor_rating.nil? %>
+                No Ratings
+            <% else %>
+                <%= User.find(request.user_other_id).accum_acceptor_rating %>
+            <% end %>
+            <div class="popup">Click to expand</div></td>
           <td onclick="location.href='<%= url_for(request) %>';" style="width:50px;text-overflow:ellipsis"><%= request.food_description %></td>
           <td onclick="location.href='<%= url_for(request) %>';">$<%= number_with_precision(request.price, :precision => 2) %></td>
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.start_time.strftime("%B %d, %Y") %></td>

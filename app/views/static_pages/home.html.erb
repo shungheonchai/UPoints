@@ -1,22 +1,5 @@
 <% content_for :top_content do %>
-    <div class="jumbotron">
-      <div class="container">
-
-
-
-          <div style="position: relative; text-align:center">
-              <span style = "position: absolute; left: 10px;"><h1>Welcome to UPoints</h1></span>
-
-            <span style ="position: absolute; right: 5px">
-              <h2><%= link_to 'List of Requests', requests_path%></h2>
-            </span>
-            <br><br><br>
-            <!--<img src = "/assets/food.jpg" alt="Food" align=middle width = 100%"><br><br>-->
-            <%#= link_to 'Contact Us', static_pages_contact_path%>&nbsp&nbsp<%#= link_to  'Liability', static_pages_liability_path%>
-          </div>
-
-      </div>
-    </div>
+    <div class="jumbotron"></div>
 
     <style>
       table, th {
@@ -35,26 +18,13 @@
         white-space: nowrap;
         text-overflow: ellipsis;
       }
-      .button {
-        background-color: #4CAF50;
-        border: none;
-        color: white;
-        padding: 16px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin-left: 4px ;
-        cursor: pointer;
-      }
     </style>
 
-    <div class="tab">
-      <button class="tablinks" id="defaultOpen">All Requests</button>
+    <h1>Welcome to UPoints</h1>
+    <h3><%= link_to 'List of Requests', requests_path%></h3>
 
-    </div>
 
-    <div id="Requests" class="tabcontent">
+    <div id="Requests">
       <table>
         <thead>
         <tr>
@@ -102,8 +72,7 @@
             })
         });
 
-        // Get the element with id="defaultOpen" and click on it
-        document.getElementById("defaultOpen").click();
+
     </script>
 
 <% end %>

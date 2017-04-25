@@ -35,7 +35,7 @@ class RequestsController < ApplicationController
     @request = Request.new(request_params)
     @request.user_id = current_user.id if current_user
     @request.poster_name = current_user.first_name+' '+ current_user.last_name
-    if (@request.start_time).past?
+    if (@request.start_time) < DateTime.now
       respond_to do |format|
         format.html { redirect_to requests_url, notice: 'You cannot have the request time to happen in the past' }
         format.json { render json: @request.errors, status: :unprocessable_entity }
