@@ -58,8 +58,8 @@
         <% if (request.user_id == current_user.id || request.user_other_id == nil) && request.end_time - 300 > Time.now %>
             <% if request.user_id == current_user.id %>
                 <tr class="highlight" bgcolor="#737CA1">
-            <% else%>
-                <tr class="highlight">
+            <%else%>
+                <tr class="everyother">
             <%end%>
             <td onclick="location.href='<%= url_for(request) %>';"><%= request.user.accum_poster_rating %><div onmousemove="movePopup(event)" class="popup">Click to expand</div></td>
             <td onclick="location.href='<%= url_for(request) %>';" style="max-width:200px;text-overflow:ellipsis"><%= request.food_description %></td>
@@ -93,7 +93,7 @@
 
     <tbody>
     <% @user_posted_requests.each do |request| %>
-        <tr class="highlight">
+        <tr class="everyother">
           <td onclick="location.href='<%= url_for(request) %>';">
             <% if request.user_other_id==nil%>
                 Not Accepted
@@ -145,7 +145,7 @@
 
     <tbody>
     <% @user_accepted_requests.each do |request| %>
-        <tr class="highlight">
+        <tr class="everyother">
           <td onclick="location.href='<%= url_for(request) %>';"><%= User.find(request.user_other_id).accum_acceptor_rating %><div class="popup">Click to expand</div></td>
           <td onclick="location.href='<%= url_for(request) %>';" style="width:50px;text-overflow:ellipsis"><%= request.food_description %></td>
           <td onclick="location.href='<%= url_for(request) %>';">$<%= number_with_precision(request.price, :precision => 2) %></td>

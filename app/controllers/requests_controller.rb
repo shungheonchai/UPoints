@@ -78,7 +78,7 @@ class RequestsController < ApplicationController
 
   def accept_request
     current_id = current_user.id
-    UserMailer.create_accept_request_acceptor(current_user, @request).deliver
+    UserMailer.accept_request_poster(current_user,@request).deliver_now
     UserMailer.create_accept_request_poster(User.find(@request.user_id), @request).deliver
     respond_to do |format|
       if current_id != @request.user_id && @request.update(user_other_id: current_id)
