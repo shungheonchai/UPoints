@@ -25,7 +25,7 @@ class User < ApplicationRecord
     all_ratings.each do |rating|
       total_rating+=rating.overall
     end
-    if (all_ratings.count == 0)
+    if all_ratings.count == 0
       avg_rating = 0
     else
       avg_rating = total_rating/(all_ratings.count)
