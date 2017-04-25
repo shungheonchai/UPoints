@@ -63,7 +63,7 @@
   <p>
     <tr>
       <td><strong>Price:</strong></td>
-      <td>$<%= number_with_precision(request.price, :precision => 2) %></td>
+      <td>$<%= number_with_precision(@request.price, :precision => 2) %></td>
     </tr>
   </p>
 
@@ -98,13 +98,6 @@
     <tr>
       <td><strong>Dropoff Location:</strong></td>
       <td><%= @request.location %></td>
-    </tr>
-  </p>
-
-  <p>
-    <tr>
-      <td><strong>Exchange method:</strong></td>
-      <td><%= @request.exchange_method %></td>
     </tr>
   </p>
 
