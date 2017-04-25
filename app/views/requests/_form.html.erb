@@ -45,14 +45,14 @@
   <div class="field">
     <tr>
     <td class="required"><%= f.label :start_time %> (Must be after current time)</td>
-    <td><%= f.datetime_select :start_time, :ampm =>true %></td>
+    <td><%= f.datetime_select :start_time, :ampm =>true, default: DateTime.now %></td>
     </tr>
   </div>
 
     <div class="field">
       <tr>
       <td class="required"><%= f.label :end_time %> (Must be at least 5 minutes after start time)</td>
-      <td><%= f.datetime_select :end_time, :ampm =>true%></td>
+      <td><%= f.datetime_select :end_time, :ampm =>true, default: (DateTime.now+10.minute)%></td>
       </tr>
     </div>
 
