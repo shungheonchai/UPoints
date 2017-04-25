@@ -63,7 +63,7 @@
   <p>
     <tr>
       <td><strong>Price:</strong></td>
-      <td>$<%= @request.price %></td>
+      <td>$<%= number_with_precision(request.price, :precision => 2) %></td>
     </tr>
   </p>
 
