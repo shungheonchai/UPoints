@@ -6,15 +6,14 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = 'bd3fb114ee1a2486915fec810bb2bfe7585e149f4ec98cb72b28e1d52c891e5c11337909f9f36e0e40178a765e016ac9f003f6214151a851427f17d1e38e7fc0'
-
+  config.secret_key = 'f35b1295ea198c5f3ae3e29964f9cbe4e5e8321d37f79088559447a689e4ebeddcaa5c0586f1e38fe0f354d926eecee10cbe39a49ac4b263ab5fa2928a7d0a5e'
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
 
   #Todo: need to change the email address once I connect it to Sendgrid
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = 'u-points@TBA.com'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -164,7 +163,7 @@ Devise.setup do |config|
   # Email regex used to validate email formats. It simply asserts that
   # one (and only one) @ exists in the given string. This is mainly
   # to give user feedback and not to assert the e-mail validity.
-  config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  config.email_regexp = /\A[^@\s]+@wustl\.edu\z/
 
   # ==> Configuration for :timeoutable
   # The time you want to timeout the user session without activity. After this

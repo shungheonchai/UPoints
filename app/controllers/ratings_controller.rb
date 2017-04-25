@@ -31,7 +31,6 @@ class RatingsController < ApplicationController
   # POST /ratings.json
   def create
     @rating = Rating.new(rating_params)
-    binding.pry
     respond_to do |format|
       if @rating.save
         current_user.update_accum_rating

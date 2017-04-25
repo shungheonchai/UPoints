@@ -25,6 +25,12 @@
 </style>
 
 <table>
+  <div class="actions">
+    <%= f.hidden_field :user_id, :value => params[:user_id] %>
+  </div>
+  <div class="actions">
+    <%= f.hidden_field :request_id, :value => params[:id] %>
+  </div>
   <!--<div class="field">-->
     <!--<tr>-->
     <!--<td><%#= f.label :user_id %></td>-->
