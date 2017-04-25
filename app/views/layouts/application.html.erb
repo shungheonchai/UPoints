@@ -12,11 +12,7 @@
 
 
 <body>
-<% if user_signed_in? %>
     <div class="navbar navbar-default navbar-fixed-top animated-short solidfill" role="navigation" id="loggedin">
-<% else %>
-    <div class="navbar navbar-default navbar-fixed-top animated-short clearfill" role="navigation" id="loggedout">
-<% end %>
 <div class="container-fluid">
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -50,22 +46,6 @@
   </div>
 </div>
 </div>
-<script>
-    var heroHeight = 1;
-
-    var nav = $("#loggedout");
-
-    $(window).scroll(function() {
-        if ($(this).scrollTop() > heroHeight) {
-            $(nav).removeClass('clearfill');
-            $(nav).addClass('solidfill');
-        }
-        else {
-            $(nav).removeClass('solidfill');
-            $(nav).addClass('clearfill');
-        }
-    });
-</script>
 <div class="container">
   <% flash.each do |key, value| %>
       <div class="alert alert-<%= key %>">

@@ -58,7 +58,7 @@
     <% @requests.each do |request| %>
         <% if (request.user_id == current_user.id || request.user_other_id == nil) && request.end_time - 300 > Time.now %>
             <% if request.user_id == current_user.id %>
-                <tr class="highlight" bgcolor="#737CA1">
+                <tr class="highlight" bgcolor="#ccc" text-color="white">
             <%else%>
                 <tr class="everyother">
             <%end%>
@@ -73,9 +73,12 @@
         <%end%>
     <% end %>
     </tbody>
+
   </table>
   <br>
+  <span>Note: Gray rows are your own requests</span>
 </div>
+
 
 <div id="Posts" class="tabcontent">
   <table>
@@ -169,6 +172,7 @@
   </table>
   <br>
 </div>
+
 </div>
 <script>
     //        var mouseX;
