@@ -43,7 +43,7 @@ class RatingsController < ApplicationController
         end
 
 
-        format.html { redirect_to @rating, notice: 'Rating was successfully created.' }
+        format.html { redirect_to requests_path, notice: 'Rating was successfully created.' }
         format.json { render :show, status: :created, location: @rating }
       else
         format.html { render :new }
