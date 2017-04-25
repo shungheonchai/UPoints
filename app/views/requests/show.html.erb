@@ -21,7 +21,7 @@
           <p>
             <tr>
               <td><strong>Rating:</strong></td>
-              <td><%= User.find(request.user_other_id).accum_acceptor_rating %></td>
+              <td><%= User.find(@request.user_other_id).accum_acceptor_rating %></td>
             </tr>
           </p>
           <p>
@@ -63,7 +63,7 @@
   <p>
     <tr>
       <td><strong>Price:</strong></td>
-      <td>$<%= number_with_precision(request.price, :precision => 2) %></td>
+      <td>$<%= number_with_precision(@request.price, :precision => 2) %></td>
     </tr>
   </p>
 
