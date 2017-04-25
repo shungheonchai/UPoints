@@ -95,9 +95,13 @@
     <% @user_posted_requests.each do |request| %>
         <tr class="everyother">
           <td onclick="location.href='<%= url_for(request) %>';">
-            <% if request.user_other_id==nil%>
+            <% if request.user_other_id==nil && Time.now > request.end_time %>
+                Expired
+            <% elsif request.user_other_id!=nil && Time.now > request.end_time %>
+                Completed
+            <% elsif request.user_other_id==nil && Time.now < request.end_time %>
                 Not Accepted
-            <% else %>
+            <% elsif request.user_other_id!=nil && Time.now < request.end_time %>
                 Accepted
             <% end %>
             <div class="popup">Click to expand</div>
