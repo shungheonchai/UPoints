@@ -19,17 +19,11 @@
     </div>
 
     <div class="field">
-      <b>Poster Rating</b><br />
+      <b>Overall Rating</b><br />
       <%if User.find(current_user.id).accum_poster_rating %>
           <%= User.find(current_user.id).accum_poster_rating %><br>
       <%else %>
           <span>Unrated</span><br>
-      <%end%>
-      <b>Acceptor Rating</b><br />
-      <%if User.find(current_user.id).accum_acceptor_rating %>
-          <%= User.find(current_user.id).accum_acceptor_rating %> <br>
-      <%else %>
-          <span>Unrated</span>
       <%end%>
     </div>
 

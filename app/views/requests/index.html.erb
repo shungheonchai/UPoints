@@ -159,7 +159,7 @@
           <td onclick="location.href='<%= url_for(request) %>';"><%= request.location %></td>
           <% if request.start_time > Time.now %>
               <td><%= link_to 'Cancel', cancel_request_path(id: request.id), method: :post, data: { confirm: 'Are you sure you want to cancel?'} %></td>
-          <% elsif request.poster_rating == false %>
+          <% elsif request.acceptor_rating == false %>
               <td><%= link_to 'Rate', new_rating_path(id: request.id, user_id: request.user_id)%></td>
           <% end %>
         </tr>
